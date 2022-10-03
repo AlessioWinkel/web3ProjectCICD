@@ -1,8 +1,8 @@
 package service;
 
-import be.ucll.project.domain.model.Team;
-import be.ucll.project.domain.model.Role;
-import be.ucll.project.domain.model.User;
+import domain.Role;
+import domain.Team;
+import domain.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
