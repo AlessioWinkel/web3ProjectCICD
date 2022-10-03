@@ -1,8 +1,12 @@
 <nav>
     <ul>
         <li class="navigatie-link"><a href="Controller?command=index">Home</a></li>
-        <li class="navigatie-link"><a href="Controller?command=registerForm">Register</a></li>
-        <li class="navigatie-link"><a href="Controller?command=userOverview">Overview</a></li>
+        <li class="navigatie-link"><a href="Controller?command=users">Users</a></li>
+        <li class="navigatie-link"><a href="Controller?command=register">Register</a></li>
+        <li class="navigatie-link"><a href="Controller?command=project">Project</a></li>
+        <li class="navigatie-link"><a href="Controller?command=addProject">Add project</a></li>
+        <li class="navigatie-link"><a href="Controller?command=workOrder">Work order</a></li>
+        <li class="navigatie-link"><a href="Controller?command=addWorkOrder">Add work order</a></li>
     </ul>
 
 </nav>
