@@ -5,7 +5,7 @@ public enum Team {
 
     private String stringValue;
 
-    private Group(String stringValue){
+    private Team(String stringValue){
         this.stringValue=stringValue;
     }
 
