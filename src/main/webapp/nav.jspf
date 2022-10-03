@@ -1,0 +1,8 @@
+<nav>
+    <ul>
+        <li class="navigatie-link"><a href="Controller?command=index">Home</a></li>
+        <li class="navigatie-link"><a href="Controller?command=registerForm">Register</a></li>
+        <li class="navigatie-link"><a href="Controller?command=userOverview">Overview</a></li>
+    </ul>
+
+</nav>
