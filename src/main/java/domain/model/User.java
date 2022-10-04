@@ -29,6 +29,7 @@ public class User {
     }
 
     public User() {
+        setRole(Role.EMPLOYEE);
     }
 
     public int getUserid() {

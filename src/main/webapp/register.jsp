@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,13 +13,7 @@
 <div id="container">
 <header>
 <h1><span>XXX</span></h1>
-<nav>
-<ul>
-<li><a href="Controller">Home</a></li>
-<li><a href="Controller?command=Overview">Overview</a></li>
-<li id="actual"><a href="Controller?command=Register">Register</a></li>
-</ul>
-</nav>
+    <jsp:include page="nav.jspf"/>
 <h2>
 Register
 </h2>
@@ -30,20 +25,58 @@ Register
 		</ul>
 	</div>
 
-    <form novalidate="novalidate">
-    	<!-- novalidate in order to be able to run tests correctly -->
-        <p><label for="userid">User id</label><input type="text" id="userid" name="userid"
-         required > </p>
-        <p><label for="firstName">First Name</label><input type="text" id="firstName" name="firstName"
-         required value=""> </p>
-        <p><label for="lastName">Last Name</label><input type="text" id="lastName" name="lastName"
-         required> </p>
-        <p><label for="email">Email</label><input type="email" id="email" name="email" required></p>
-        <p><label for="password">Password</label><input type="password" id="password"  name="password"
-         required> </p>
-        <p><input type="submit" id="signUp" value="Sign Up"></p>
-        
-    </form>
+
+        <div id="container2">
+            <main>
+                <c:if test="${not empty errors}">
+                    <div class="alert alert-danger">
+                        <ul>
+                            <c:forEach items="${errors}" var="error">
+                                <li>${error}</li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </c:if>
+                <h2>Registreer je</h2>
+
+                <form method="POST" action="Controller?command=registerUser" novalidate>
+
+                    <p class="form-group ${firstNameClass}">
+                        <label class="control-label" for="firstName">First name</label>
+                        <input id="firstName" name="firstName" type="text"
+                               value="${firstNamePreviousValue}" >
+                    </p>
+                    <p class="form-group ${lastNameClass}">
+                        <label class="control-label" for="lastName">Last name</label>
+                        <input id="lastName" name="lastName" type="text"
+                               value="${lastPreviousValue}" >
+                    </p>
+
+                    <p class="form-group ${emailClass}">
+                        <label class="control-label" for="email">Email</label>
+                        <input id="email" name="email" type="text"
+                               value="${emailPreviousValue}">
+                    </p>
+
+                    <p class="form-group ${passwordClass}">
+                        <label class="control-label" for="password">Password</label>
+                        <input id="password" name="password" type="password"
+                               value="${passwordPreviousValue}" >
+                    </p>
+                    <p>
+                        <label for="team">Team</label>
+
+                        <select name="team" id="team">
+                            <option value="Alpha">Alpha</option>
+                            <option value="Beta">Beta</option>
+                            <option value="Gamma">Gamma</option>
+                            <option value="Delta">Delta</option>
+                            <option value="Epsilon">Epsilon</option>
+                        </select>
+                    </p>
+                    <p><input type="submit" id="signUp" value="Sign Up"></p>
+                </form>
+        </div>
 </main>
 <footer>
 &copy; Webontwikkeling 3, UC Leuven-Limburg
