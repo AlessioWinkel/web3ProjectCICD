@@ -4,6 +4,7 @@ import domain.model.Role;
 import domain.model.Team;
 import domain.model.User;
 import domain.exceptions.DbException;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +13,7 @@ import java.util.Map;
 
 public class UserService {
     private final Map<Integer, User> users = new HashMap<Integer, User>();
+    private final ArrayList<User> usersArray = new ArrayList<>();
     private int userid = 1;    // als je later werkt met externe databank, wordt dit userid automatisch gegenereerd
 
     public UserService() {
@@ -29,14 +31,23 @@ public class UserService {
     }
 
     public void add(User user) {
+        boolean sameEmail = false;
         if (user == null) {
             throw new DbException("No user given");
         }
+        for (User user1 : usersArray) {
+            if (user.getEmail().equals(user1.getEmail())) {
+                sameEmail = true;
+            }
+        }
+        if (sameEmail) throw new DbException("A user with this email already exists");
+
         if (users.containsKey(user.getUserid())) {
             throw new DbException("User already exists");
         }
         user.setUserid(userid);   // user toevoegen geeft altijd nieuw userid
         users.put(user.getUserid(), user);
+        usersArray.add(user);
         userid++;
     }
 

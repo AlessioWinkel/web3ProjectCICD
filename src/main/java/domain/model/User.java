@@ -44,6 +44,7 @@ public class User {
         if (email.isEmpty()) {
             throw new IllegalArgumentException("No email given");
         }
+
         String USERID_PATTERN =
                 "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                         + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";

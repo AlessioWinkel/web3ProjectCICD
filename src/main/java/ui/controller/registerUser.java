@@ -1,5 +1,6 @@
 package ui.controller;
 
+import domain.exceptions.DbException;
 import domain.exceptions.DomainException;
 import domain.model.User;
 
@@ -24,7 +25,7 @@ public class registerUser extends RequestHandler{
             try {
                 service.add(user);
                 return "Controller?command=userOverview";
-            } catch (DomainException exc) {
+            } catch (DomainException | DbException exc) {
                 errors.add(exc.getMessage());
             }
         }
@@ -81,6 +82,11 @@ public class registerUser extends RequestHandler{
             errors.add(exc.getMessage());
             request.setAttribute("emailClass", "has-error");
         }
+        catch (DbException exc2) {
+            errors.add(exc2.getMessage());
+            request.setAttribute("passwordClass", "has-error");
+        }
+
     }
 
     private void setPassword(User user, HttpServletRequest request, ArrayList<String> errors) {
@@ -94,6 +100,7 @@ public class registerUser extends RequestHandler{
             errors.add(exc.getMessage());
             request.setAttribute("passwordClass", "has-error");
         }
+
     }
 
 }
