@@ -1,4 +1,6 @@
-package domain;
+package domain.model;
+
+import domain.exceptions.DomainException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

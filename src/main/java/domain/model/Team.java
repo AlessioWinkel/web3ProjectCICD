@@ -1,4 +1,4 @@
-package domain;
+package domain.model;
 
 public enum Team {
     ALPHA("alpha"), BETA("beta"), GAMMA("gamma"), DELTA("delta"), EPSILON("epsilon");

@@ -1,7 +1,7 @@
 <nav>
     <ul>
-        <li class="navigatie-link"><a href="Controller?command=index">Home</a></li>
-        <li class="navigatie-link"><a href="Controller?command=users">Users</a></li>
+        <li class="navigatie-link"><a href="Controller?command=Home">Home</a></li>
+        <li class="navigatie-link"><a href="Controller?command=userOverview">Users</a></li>
         <li class="navigatie-link"><a href="Controller?command=register">Register</a></li>
         <li class="navigatie-link"><a href="Controller?command=project">Project</a></li>
         <li class="navigatie-link"><a href="Controller?command=addProject">Add project</a></li>

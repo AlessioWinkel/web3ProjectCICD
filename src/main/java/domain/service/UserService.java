@@ -1,8 +1,9 @@
-package service;
+package domain.service;
 
-import domain.Role;
-import domain.Team;
-import domain.User;
+import domain.model.Role;
+import domain.model.Team;
+import domain.model.User;
+import domain.exceptions.DbException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
