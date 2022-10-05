@@ -51,6 +51,20 @@ public class UserService {
         userid++;
     }
 
+    public boolean zelfdeEmails(String email) {
+        boolean zelfde = false;
+        int count = 0;
+        for (User user1 : usersArray) {
+            if (user1.getEmail().equals(email)) {
+                count++;
+            }
+        }
+        if (count >= 1) {
+            zelfde = true;
+        }
+        return zelfde;
+    }
+
     public void update(User user) {
         if (user == null) {
             throw new DbException("No user given");

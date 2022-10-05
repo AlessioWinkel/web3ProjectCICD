@@ -14,6 +14,7 @@ public class User {
     private Team team;
     private Role role;
 
+
     public User(String email, String password, String firstName, String lastName, Team team) {
         setEmail(email);
         setPassword(password);
@@ -21,6 +22,7 @@ public class User {
         setLastName(lastName);
         setTeam(team);
         setRole(Role.EMPLOYEE);
+
     }
 
     public User(int userid, String email, String password, String firstName, String lastName, Team team) {

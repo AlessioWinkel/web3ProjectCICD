@@ -2,37 +2,45 @@ package ui.controller;
 
 import domain.exceptions.DbException;
 import domain.exceptions.DomainException;
+import domain.model.Role;
 import domain.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
-public class registerUser extends RequestHandler{
+public class updateUser extends RequestHandler{
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<String>();
 
-        User user = new User();
+        String id = request.getParameter("id");
+
+        User user = service.get(Integer.parseInt(id));
+
         setFirstName(user,request,errors);
         setLastName(user,request,errors);
         setEmail(user,request,errors);
-        setPassword(user,request,errors);
+        setRole(user,request,errors);
         setTeam(user,request,errors);
+
+        request.setAttribute("user",user);
 
         if (errors.size() == 0) {
             try {
-                service.add(user);
                 return "Controller?command=userOverview";
             } catch (DomainException | DbException exc) {
                 errors.add(exc.getMessage());
             }
         }
         request.setAttribute("errors", errors);
-        return "register.jsp";
+        return "editUser.jsp";
 
     }
+
+
+
+
 
     private void setTeam(User user, HttpServletRequest request, ArrayList<String> errors) {
         String team = request.getParameter("team");
@@ -73,6 +81,9 @@ public class registerUser extends RequestHandler{
 
     private void setEmail(User user, HttpServletRequest request, ArrayList<String> errors) {
         String email = request.getParameter("email");
+        if (service.zelfdeEmails(email)) {
+            errors.add("Er is al een account met dezelfde mail.");
+        }
         try {
             user.setEmail(email);
             request.setAttribute("emailClass", "has-success");
@@ -85,18 +96,17 @@ public class registerUser extends RequestHandler{
 
     }
 
-    private void setPassword(User user, HttpServletRequest request, ArrayList<String> errors) {
-        String password = request.getParameter("password");
+    private void setRole(User user, HttpServletRequest request, ArrayList<String> errors) {
+        String role = request.getParameter("role");
         try {
-            user.setPassword(password);
-            request.setAttribute("passwordClass", "has-success");
-            request.setAttribute("passwordPreviousValue", password);
+            user.setRole(Role.valueOf(role.toUpperCase()));
+            request.setAttribute("roleClass", "has-success");
+            request.setAttribute("rolePreviousValue", role);
         }
         catch (IllegalArgumentException exc) {
             errors.add(exc.getMessage());
-            request.setAttribute("passwordClass", "has-error");
+            request.setAttribute("roleClass", "has-error");
         }
 
     }
-
 }

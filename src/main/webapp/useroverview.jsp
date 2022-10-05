@@ -34,6 +34,9 @@ User Overview
                 <th>Email</th>
                 <th>Team</th>
                 <th>Role</th>
+                <th>Pas aan</th>
+                <th>Verwijder</th>
+
             </thead>
             <tbody>
             <c:forEach var="user"  items="${users}">
@@ -44,6 +47,16 @@ User Overview
                     <td>${user.email}</td>
                     <td>${user.team}</td>
                     <td>${user.role}</td>
+                    <td>
+                        <a href="Controller?command=editPage&id=${user.userid}&lastName=${user.lastName}&firstName=${user.firstName}&email=${user.email}" id="pasAanKnop">
+                            Pas aan
+                        </a>
+                    </td>
+
+                    <td>
+                        <a href="Controller?command=verwijderConfirmatie&id=${user.userid}&firstName=${user.firstName}" id="verwijderKnop">X</a>
+                    </td>
+
                 </tr>
 
             </c:forEach>
