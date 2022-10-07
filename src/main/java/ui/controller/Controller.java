@@ -3,6 +3,7 @@ package ui.controller;
 import domain.service.UserService;
 
 import java.io.*;
+import java.security.NoSuchAlgorithmException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -33,7 +34,11 @@ public class Controller extends HttpServlet {
 
         if (command != null) {
             RequestHandler handler = handlerFactory.getHandler(command, service);
-            destination = handler.handleRequest(request, response);
+            try {
+                destination = handler.handleRequest(request, response);
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
         }
 
         RequestDispatcher view = request.getRequestDispatcher(destination);

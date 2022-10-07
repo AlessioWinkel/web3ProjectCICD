@@ -14,6 +14,7 @@
 	<div id="container">
 		<header>
 			<jsp:include page="nav.jspf"/>
+
 		</header>
 		<main>
 			<h1>User overview</h1>

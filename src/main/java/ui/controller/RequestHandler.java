@@ -5,11 +5,13 @@ import domain.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 public abstract class RequestHandler {
     protected UserService service;
 
-    public abstract String handleRequest (HttpServletRequest request, HttpServletResponse response);
+    public abstract String handleRequest (HttpServletRequest request, HttpServletResponse response) throws IOException, NoSuchAlgorithmException;
 
     public UserService getService() {
         return service;

@@ -131,4 +131,10 @@ public class User {
     public String toString() {
         return getFirstName() + " " + getLastName() + ": " + getUserid() + ", " + getEmail() + ", " + getRole() + ", " + getTeam();
     }
+    public boolean isPasswordCorrect(String password){
+        if (password != null && password.equals(getPassword()))
+            return true;
+        else
+            return false;
+    }
 }
