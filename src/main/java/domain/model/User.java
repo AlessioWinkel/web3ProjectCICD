@@ -30,6 +30,8 @@ public class User {
         this.setUserid(userid);
     }
 
+
+
     public User() {
         setRole(Role.EMPLOYEE);
     }
@@ -63,7 +65,7 @@ public class User {
         return email;
     }
 
-    private String getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -106,6 +108,8 @@ public class User {
     public Team getTeam() {
         return team;
     }
+
+    public String getTeamString() {return team.getStringValue();}
 
     public void setTeam(Team team) {
         this.team = team;

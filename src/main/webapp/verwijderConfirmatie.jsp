@@ -20,7 +20,7 @@
     <p>Bent u zeker dat u de afspraak wilt verwijderen?</p>
     <a href="Controller?command=verwijder&id=${param.id}&naam=${param.naam}" id="verwijderConfirmatie">
         Ja
-    </a></p>
+    </a>
     <p>
         <a href="Controller?command=userOverview" id="verwijderCancel">Cancel</a>
     </p>

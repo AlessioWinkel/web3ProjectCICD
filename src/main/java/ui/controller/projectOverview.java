@@ -1,20 +1,16 @@
 package ui.controller;
 
-import domain.model.User;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class editPage extends RequestHandler{
-
+public class projectOverview extends RequestHandler{
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        int id = Integer.parseInt(request.getParameter("id"));
-        User user = service.findUserWithId(id);
-        request.setAttribute("user",user);
+        request.setAttribute("projects", service.getAllProjects());
+        request.setAttribute("aantalProjecten", service.getNumberOfProjects());
+        return "projectOverview.jsp";
 
-        return "editUser.jsp";
     }
 }

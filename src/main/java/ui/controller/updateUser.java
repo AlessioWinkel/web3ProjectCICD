@@ -16,7 +16,7 @@ public class updateUser extends RequestHandler{
 
         String id = request.getParameter("id");
 
-        User user = service.get(Integer.parseInt(id));
+        User user = service.findUserWithId(Integer.parseInt(id));
 
         setFirstName(user,request,errors);
         setLastName(user,request,errors);

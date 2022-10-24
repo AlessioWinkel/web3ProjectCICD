@@ -23,7 +23,7 @@ public class registerUser extends RequestHandler{
 
         if (errors.size() == 0) {
             try {
-                service.add(user);
+                service.addUser(user);
                 return "Controller?command=userOverview";
             } catch (DomainException | DbException exc) {
                 errors.add(exc.getMessage());

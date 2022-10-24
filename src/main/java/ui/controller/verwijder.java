@@ -14,7 +14,7 @@ public class verwijder extends RequestHandler{
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("service",service);
         int id = Integer.parseInt(request.getParameter("id"));
-        service.delete(id);
+        service.deleteUser(id);
         return "useroverview.jsp";
     }
 }

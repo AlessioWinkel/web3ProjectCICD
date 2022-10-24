@@ -1,6 +1,7 @@
 package ui.controller;
 
-import domain.service.UserService;
+import domain.service.AppService;
+import domain.service.UserServiceInMemory;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
@@ -12,7 +13,8 @@ import javax.servlet.annotation.*;
 
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
-    private UserService service = new UserService();
+    private AppService service = new AppService();
+
     private HandlerFactory handlerFactory = new HandlerFactory();
 
     public Controller() {

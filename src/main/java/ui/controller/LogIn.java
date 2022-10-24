@@ -29,7 +29,7 @@ public class LogIn extends RequestHandler{
 
     private void login(HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors) throws IOException, NoSuchAlgorithmException {
 
-        ArrayList<User> values = new ArrayList(service.getAll());
+        ArrayList<User> values = new ArrayList(service.getAllUsers());
         request.setAttribute("users", values);
         String email = request.getParameter("email");
         String password = request.getParameter("password");

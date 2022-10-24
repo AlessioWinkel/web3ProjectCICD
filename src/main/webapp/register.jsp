@@ -19,11 +19,6 @@ Register
 </h2>
 
 </header><main>
-	<div class="alert-danger">
-		<ul>
-			<li>Some error</li>
-		</ul>
-	</div>
 
 
         <div id="container2">
