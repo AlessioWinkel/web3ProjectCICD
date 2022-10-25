@@ -35,7 +35,7 @@ public class ProjectServiceDBSQL implements ProjectService{
             preparedStatement.setDate(3, new java.sql.Date(project.getStart().getTime()));
             preparedStatement.setDate(4, new java.sql.Date(project.getEnd().getTime()));
 
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
@@ -46,7 +46,7 @@ public class ProjectServiceDBSQL implements ProjectService{
         try {
             PreparedStatement statement = getConnection().prepareStatement(sql);
             statement.setInt(1, id);
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         }

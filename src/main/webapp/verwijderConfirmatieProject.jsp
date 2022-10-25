@@ -16,7 +16,7 @@
 <body>
 <article class="random-tekst">
     <p>Bent u zeker dat u het project wilt verwijderen?</p>
-    <a href="Controller?command=verwijderProject&id=${param.id}&naam=${param.name}" id="verwijderConfirmatie">
+    <a href="Controller?command=verwijderProject&id=${param.id}" id="verwijderConfirmatie">
         Ja
     </a>
     <p>

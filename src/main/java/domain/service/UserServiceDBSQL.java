@@ -32,7 +32,7 @@ public class UserServiceDBSQL implements UserService{
             preparedStatement.setString(4, user.getLastName());
             preparedStatement.setString(5, user.getTeamString());
             preparedStatement.setString(6, "EMPLOYEE");
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
@@ -159,7 +159,7 @@ public class UserServiceDBSQL implements UserService{
         try {
             PreparedStatement statement = getConnection().prepareStatement(sql);
             statement.setInt(1, id);
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
