@@ -33,10 +33,10 @@ public class ProjectServiceInMemory implements ProjectService {
     }
 
     @Override
-    public Project findProjectWithName(String naam) {
+    public Project findProjectWithId(int id) {
         Project project2 = new Project();
         for (Project project : projectsArray) {
-            if (project.getName().equals(naam)) {
+            if (project.getProjectid() == id) {
                 project2 = project;
             }
         }

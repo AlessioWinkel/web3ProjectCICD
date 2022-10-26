@@ -21,19 +21,29 @@ public class User {
         setFirstName(firstName);
         setLastName(lastName);
         setTeam(team);
-        setRole(Role.EMPLOYEE);
+        setRole("employee");
+
+    }
+    public User(String email, String password, String firstName, String lastName, Team team,String role) {
+        setEmail(email);
+        setPassword(password);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setTeam(team);
+        setRole(role);
 
     }
 
-    public User(int userid, String email, String password, String firstName, String lastName, Team team) {
-        this(email, password, firstName, lastName, team);
+
+    public User(int userid, String email, String password, String firstName, String lastName, Team team,String role) {
+        this(email, password, firstName, lastName, team,role);
         this.setUserid(userid);
     }
 
 
 
     public User() {
-        setRole(Role.EMPLOYEE);
+        setRole("employee");
     }
 
     public int getUserid() {
@@ -123,12 +133,14 @@ public class User {
         }
     }
 
+    public String getRoleString() {return this.role.getStringValue();}
+
     public Role getRole() {
         return this.role;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRole(String role) {
+        this.role = Role.valueOf(role.toUpperCase());
     }
 
     @Override

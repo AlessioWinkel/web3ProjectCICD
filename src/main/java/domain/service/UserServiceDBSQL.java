@@ -59,7 +59,8 @@ public class UserServiceDBSQL implements UserService{
                 String lastName = result.getString("last_name");
                 String teamString = result.getString("team");
                 Team team = Team.valueOf(teamString.toUpperCase());
-                users.add(new User(id,email,password,firstName,lastName,team));
+                String role = result.getString("role");
+                users.add(new User(id,email,password,firstName,lastName,team,role));
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -80,7 +81,8 @@ public class UserServiceDBSQL implements UserService{
                 String lastName = result.getString("last_name");
                 String teamString = result.getString("team");
                 Team team = Team.valueOf(teamString.toUpperCase());
-                users.add(new User(id,email,password,firstName,lastName,team));
+                String role = result.getString("role");
+                users.add(new User(id,email,password,firstName,lastName,team,role));
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -104,12 +106,13 @@ public class UserServiceDBSQL implements UserService{
                 String lastName = result.getString("last_name");
                 String teamString = result.getString("team");
                 Team team = Team.valueOf(teamString.toUpperCase());
-                users.add(new User(id2,email,password,firstName,lastName,team));
+                String role = result.getString("role");
+                users.add(new User(id2,email,password,firstName,lastName,team,role));
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
-        if (id <=0 || id>users.size())
+        if (id <=0)
             throw new IllegalArgumentException("Foute id ingegeven");
         for (User user : users) {
             if (user.getUserid() == id)
@@ -135,7 +138,8 @@ public class UserServiceDBSQL implements UserService{
                 String lastName = result.getString("last_name");
                 String teamString = result.getString("team");
                 Team team = Team.valueOf(teamString.toUpperCase());
-                users.add(new User(id,email,password,firstName,lastName,team));
+                String role = result.getString("role");
+                users.add(new User(id,email2,password,firstName,lastName,team,role));
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -148,7 +152,7 @@ public class UserServiceDBSQL implements UserService{
                 count++;
             }
         }
-        if (count >= 1) {
+        if (count > 1) {
             zelfde = true;
         }
         return zelfde;
@@ -159,6 +163,23 @@ public class UserServiceDBSQL implements UserService{
         try {
             PreparedStatement statement = getConnection().prepareStatement(sql);
             statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void updateUser(int id,String firstName, String lastName, String email, String team, String role) {
+        String sql = String.format("UPDATE %s.user SET first_name=?, last_name=?, email=?, team=?, role=? WHERE userid=?", schema);
+        try {
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            statement.setString(1, firstName);
+            statement.setString(2, lastName);
+            statement.setString(3, email);
+            statement.setString(4, team);
+            statement.setString(5, role);
+            statement.setInt(6,id);
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DbException(e.getMessage());

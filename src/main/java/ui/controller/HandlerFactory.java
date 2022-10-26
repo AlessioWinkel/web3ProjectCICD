@@ -1,7 +1,6 @@
 package ui.controller;
 
 import domain.service.AppService;
-import domain.service.UserServiceInMemory;
 
 public class HandlerFactory {
     public RequestHandler getHandler(String command, AppService service) {

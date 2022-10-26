@@ -3,6 +3,7 @@ package ui.controller;
 import domain.exceptions.DbException;
 import domain.exceptions.DomainException;
 import domain.model.Project;
+import ui.controller.RequestHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +13,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class addProject extends RequestHandler{
+public class addProject extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, NoSuchAlgorithmException {
         ArrayList<String> errors = new ArrayList<String>();

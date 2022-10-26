@@ -3,13 +3,13 @@ package ui.controller;
 import domain.exceptions.DbException;
 import domain.exceptions.DomainException;
 import domain.model.User;
+import ui.controller.RequestHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
-public class registerUser extends RequestHandler{
+public class registerUser extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<String>();

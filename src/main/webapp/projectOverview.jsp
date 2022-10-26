@@ -52,7 +52,7 @@
                     <td>${project.end}</td>
 
                     <td>
-                        <a href="Controller?command=editPageProject&id=${project.projectid}&name=${project.name}" id="pasAanKnop">
+                        <a href="Controller?command=editProjectPage&id=${project.projectid}&name=${project.name}" id="pasAanKnop">
                             Pas aan
                         </a>
                     </td>

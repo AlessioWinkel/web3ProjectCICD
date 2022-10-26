@@ -17,19 +17,8 @@
 
 		</header>
 		<main>
-			<h1>User overview</h1>
-			<table>
-				<tr>
-					<th>User id</th>
-					<th>Name</th>
-					<th>Firstname</th>
-					<th>Email</th>
-					<th>Team</th>
-					<th>Role</th>
-					<th>Edit</th>
-					<th>Delete</th>
-				</tr>
-			</table>
+			<h1>Home</h1>
+
 		</main>
 	</div>
 </body>

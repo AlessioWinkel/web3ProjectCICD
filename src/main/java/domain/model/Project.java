@@ -48,7 +48,9 @@ public class Project {
 
 
     public void setEnd(Date end) {
-        this.end = end;
+        if (end.before(this.start)) {
+            throw new IllegalArgumentException("Einde datum moet na de startdatum liggen!");
+        }
     }
 
     public void setName(String name) {

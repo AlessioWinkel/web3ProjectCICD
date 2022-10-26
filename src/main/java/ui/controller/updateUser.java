@@ -4,19 +4,20 @@ import domain.exceptions.DbException;
 import domain.exceptions.DomainException;
 import domain.model.Role;
 import domain.model.User;
+import ui.controller.RequestHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
-public class updateUser extends RequestHandler{
+public class updateUser extends RequestHandler {
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
         ArrayList<String> errors = new ArrayList<String>();
 
-        String id = request.getParameter("id");
+        int id = Integer.parseInt(request.getParameter("id"));
 
-        User user = service.findUserWithId(Integer.parseInt(id));
+        User user = service.findUserWithId(id);
 
         setFirstName(user,request,errors);
         setLastName(user,request,errors);
@@ -24,10 +25,12 @@ public class updateUser extends RequestHandler{
         setRole(user,request,errors);
         setTeam(user,request,errors);
 
+
         request.setAttribute("user",user);
 
         if (errors.size() == 0) {
             try {
+                service.updateUser(user.getUserid(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getTeamString(),user.getRoleString());
                 return "Controller?command=userOverview";
             } catch (DomainException | DbException exc) {
                 errors.add(exc.getMessage());
@@ -43,7 +46,7 @@ public class updateUser extends RequestHandler{
 
 
     private void setTeam(User user, HttpServletRequest request, ArrayList<String> errors) {
-        String team = request.getParameter("team");
+        String team = request.getParameter("teamInput");
         try {
             user.setTeam(team);
             request.setAttribute("teamClass", "has-success");
@@ -55,7 +58,7 @@ public class updateUser extends RequestHandler{
         }
     }
     private void setFirstName(User user, HttpServletRequest request, ArrayList<String> errors) {
-        String firstName = request.getParameter("firstName");
+        String firstName = request.getParameter("firstNameInput");
         try {
             user.setFirstName(firstName);
             request.setAttribute("firstNameClass", "has-success");
@@ -67,7 +70,7 @@ public class updateUser extends RequestHandler{
         }
     }
     private void setLastName(User user, HttpServletRequest request, ArrayList<String> errors) {
-        String lastName = request.getParameter("lastName");
+        String lastName = request.getParameter("lastNameInput");
         try {
             user.setLastName(lastName);
             request.setAttribute("lastNameClass", "has-success");
@@ -80,7 +83,8 @@ public class updateUser extends RequestHandler{
     }
 
     private void setEmail(User user, HttpServletRequest request, ArrayList<String> errors) {
-        String email = request.getParameter("email");
+
+        String email = request.getParameter("emailInput");
         if (service.zelfdeEmails(email)) {
             errors.add("Er is al een account met dezelfde mail.");
         }
@@ -97,9 +101,9 @@ public class updateUser extends RequestHandler{
     }
 
     private void setRole(User user, HttpServletRequest request, ArrayList<String> errors) {
-        String role = request.getParameter("role");
+        String role = request.getParameter("roleInput");
         try {
-            user.setRole(Role.valueOf(role.toUpperCase()));
+            user.setRole(role);
             request.setAttribute("roleClass", "has-success");
             request.setAttribute("rolePreviousValue", role);
         }

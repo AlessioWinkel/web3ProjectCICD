@@ -20,7 +20,7 @@
     <div id="container2">
         <main>
             <h1>Edit user</h1>
-            <h2>User id: ${user.userid}</h2>
+            <h2>User id: ${param.id}</h2>
             <c:if test="${not empty errors}">
             <div class="alert alert-danger">
                 <ul>
@@ -32,38 +32,38 @@
             </c:if>
             <h2>Registreer je</h2>
 
-            <form method="POST" action="Controller?command=updateUser&id=${user.userid}" novalidate>
+            <form method="POST" action="Controller?command=updateUser&id=${param.id}" novalidate>
 
                 <p class="form-group ${firstNameClass}">
-                    <label class="control-label" for="firstName">First name</label>
-                    <input id="firstName" name="firstName" type="text"
+                    <label class="control-label" for="firstNameInput">First name</label>
+                    <input id="firstNameInput" name="firstNameInput" type="text"
                            value="${param.firstName}" >
                 </p>
                 <p class="form-group ${lastNameClass}">
-                    <label class="control-label" for="lastName">Last name</label>
-                    <input id="lastName" name="lastName" type="text"
+                    <label class="control-label" for="lastNameInput">Last name</label>
+                    <input id="lastNameInput" name="lastNameInput" type="text"
                            value="${param.lastName}" >
                 </p>
 
                 <p class="form-group ${emailClass}">
-                    <label class="control-label" for="email">Email</label>
-                    <input id="email" name="email" type="text"
+                    <label class="control-label" for="emailInput">Email</label>
+                    <input id="emailInput" name="emailInput" type="text"
                            value="${param.email}">
                 </p>
 
                 <p>
-                    <label for="role">Team</label>
+                    <label for="roleInput">Role</label>
 
-                    <select name="role" id="role">
+                    <select name="roleInput" id="roleInput">
                         <option value="Employee">Employee</option>
                         <option value="Director">Director</option>
                         <option value="Teamleader">Teamleader</option>
                     </select>
                 </p>
                 <p>
-                    <label for="team">Team</label>
+                    <label for="teamInput">Team</label>
 
-                    <select name="team" id="team">
+                    <select name="teamInput" id="teamInput">
                         <option value="Alpha">Alpha</option>
                         <option value="Beta">Beta</option>
                         <option value="Gamma">Gamma</option>

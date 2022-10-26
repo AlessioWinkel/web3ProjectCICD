@@ -14,8 +14,14 @@ public class AppService {
 
     public ArrayList<Project> getAllProjects() {return projects.getAllProjects();}
 
+    public Project findProjectWithId(int id) {return projects.findProjectWithId(id);}
+
     public void addUser(User user) {users.addUser(user);}
     public void deleteUser(int id) {users.delete(id);}
+
+    public void updateUser(int id,String firstName, String lastName, String email, String team, String role) {
+        users.updateUser(id,firstName,lastName,email,team,role);
+    }
 
     public User findUserWithId(int id) {
         return users.findUserWithId(id);

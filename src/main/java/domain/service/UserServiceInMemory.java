@@ -17,7 +17,7 @@ public class UserServiceInMemory implements UserService {
 
     public UserServiceInMemory() {
         User director = new User("director@ucll.be", "t", "Ad", "Director", Team.ALPHA);
-        director.setRole(Role.DIRECTOR);
+        director.setRole(String.valueOf(Role.DIRECTOR));
         addUser(director);
     }
     @Override
@@ -96,6 +96,11 @@ public class UserServiceInMemory implements UserService {
 
     public void delete(int userid) {
         users.remove(userid);   // userid gaat verloren, maar wordt niet ingenomen door eventuele nieuwe user
+    }
+
+    @Override
+    public void updateUser(int id, String firstName, String lastName, String email, String team, String role) {
+
     }
 
     public int getNumberOfUsers() {

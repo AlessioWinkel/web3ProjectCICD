@@ -8,7 +8,8 @@ import java.util.ArrayList;
 public interface ProjectService {
     void addProject(Project project);
 
-    Project findProjectWithName(String naam);
+
+    Project findProjectWithId(int id);
 
     ArrayList<Project> getAllProjects();
 

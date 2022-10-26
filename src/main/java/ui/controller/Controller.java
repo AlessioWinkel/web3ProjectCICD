@@ -1,7 +1,6 @@
 package ui.controller;
 
 import domain.service.AppService;
-import domain.service.UserServiceInMemory;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;

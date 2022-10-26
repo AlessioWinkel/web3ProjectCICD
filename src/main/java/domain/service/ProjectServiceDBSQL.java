@@ -53,8 +53,39 @@ public class ProjectServiceDBSQL implements ProjectService{
     }
 
     @Override
-    public Project findProjectWithName(String naam) {
-        return null;
+    public Project findProjectWithId(int id) {
+        ArrayList<Project> projects = new ArrayList<>();
+        Project project2 = null;
+        String sql = String.format("SELECT * from %s.project", schema);
+        try {
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                int id2 = result.getInt("projectid");
+                String naam = result.getString("naam");
+                String teamString = result.getString("team");
+                Team team = Team.valueOf(teamString.toUpperCase());
+                Date start = new SimpleDateFormat("yyyy-dd-MM").parse(result.getString("start"));
+                if (result.getString("einde") == null) {
+                    projects.add(new Project(id,naam,team,start,null));
+                } else {
+                    Date einde = new SimpleDateFormat("yyyy-dd-MM").parse(result.getString("einde"));
+                    projects.add(new Project(id2,naam,team,start,einde));
+                }
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        if (id <=0)
+            throw new IllegalArgumentException("Foute id ingegeven");
+        for (Project project : projects) {
+            if (project.getProjectid() == id)
+                project2 = project;
+        }
+
+        return project2;
     }
 
     @Override

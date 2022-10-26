@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 
-public class LogIn extends RequestHandler{
+public class LogIn extends RequestHandler {
 
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, NoSuchAlgorithmException {
         ArrayList<String> errors = new ArrayList<>();
