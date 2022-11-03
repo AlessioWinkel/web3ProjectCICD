@@ -20,7 +20,7 @@
     <div id="container2">
         <main>
             <h1>Edit user</h1>
-            <h2>User id: ${param.id}</h2>
+            <h2>User id: <a id="userIdElement">${param.id}</a></h2>
             <c:if test="${not empty errors}">
             <div class="alert alert-danger">
                 <ul>

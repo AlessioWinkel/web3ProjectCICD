@@ -47,6 +47,8 @@
                     <input id="endDate" name="endDate" type="text">
                 </p>
 
+                <p><input type="submit" id="update" value="Update"></p>
+
             </form>
     </div>
 </main>

@@ -1,5 +1,7 @@
 package domain.service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import domain.exceptions.DbException;
+import domain.model.Role;
 import domain.model.Team;
 import domain.model.User;
 import domain.util.DbConnectionService;
@@ -17,6 +20,7 @@ public class UserServiceDBSQL implements UserService{
     private final String schema;
 
     public UserServiceDBSQL() {
+
         this.connection = DbConnectionService.getDbConnection();
         this.schema = DbConnectionService.getSchema();
     }
@@ -64,6 +68,10 @@ public class UserServiceDBSQL implements UserService{
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
         return users;
     }
@@ -84,7 +92,7 @@ public class UserServiceDBSQL implements UserService{
                 String role = result.getString("role");
                 users.add(new User(id,email,password,firstName,lastName,team,role));
             }
-        } catch (SQLException e) {
+        } catch (SQLException | UnsupportedEncodingException | NoSuchAlgorithmException e) {
             throw new DbException(e.getMessage());
         }
         return users.size();
@@ -109,7 +117,7 @@ public class UserServiceDBSQL implements UserService{
                 String role = result.getString("role");
                 users.add(new User(id2,email,password,firstName,lastName,team,role));
             }
-        } catch (SQLException e) {
+        } catch (SQLException | UnsupportedEncodingException | NoSuchAlgorithmException e) {
             throw new DbException(e.getMessage());
         }
         if (id <=0)
@@ -141,7 +149,7 @@ public class UserServiceDBSQL implements UserService{
                 String role = result.getString("role");
                 users.add(new User(id,email2,password,firstName,lastName,team,role));
             }
-        } catch (SQLException e) {
+        } catch (SQLException | UnsupportedEncodingException | NoSuchAlgorithmException e) {
             throw new DbException(e.getMessage());
         }
 

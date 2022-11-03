@@ -7,6 +7,8 @@ import ui.controller.RequestHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 public class registerUser extends RequestHandler {
@@ -88,13 +90,17 @@ public class registerUser extends RequestHandler {
     private void setPassword(User user, HttpServletRequest request, ArrayList<String> errors) {
         String password = request.getParameter("password");
         try {
-            user.setPassword(password);
+            user.setPwdHashed(password);
             request.setAttribute("passwordClass", "has-success");
             request.setAttribute("passwordPreviousValue", password);
         }
         catch (IllegalArgumentException exc) {
             errors.add(exc.getMessage());
             request.setAttribute("passwordClass", "has-error");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
         }
 
     }

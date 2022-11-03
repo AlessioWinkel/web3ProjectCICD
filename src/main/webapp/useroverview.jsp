@@ -4,7 +4,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta charset="UTF-8">
-<title>Overview</title>
+<title>Bekijk alle users</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -18,7 +18,7 @@ User Overview
 </h2>
 
 </header><main>
-    <div class="random-tekst"><h2 >Bekijk alle fietsen</h2></div>
+    <div class="random-tekst"><h2 >Bekijk alle users</h2></div>
 
     <section class="tabel-box">
 

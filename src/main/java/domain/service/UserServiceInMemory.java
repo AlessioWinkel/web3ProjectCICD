@@ -5,6 +5,8 @@ import domain.model.Team;
 import domain.model.User;
 import domain.exceptions.DbException;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +17,7 @@ public class UserServiceInMemory implements UserService {
     private final ArrayList<User> usersArray = new ArrayList<>();
     private int userid = 1;    // als je later werkt met externe databank, wordt dit userid automatisch gegenereerd
 
-    public UserServiceInMemory() {
+    public UserServiceInMemory() throws UnsupportedEncodingException, NoSuchAlgorithmException {
         User director = new User("director@ucll.be", "t", "Ad", "Director", Team.ALPHA);
         director.setRole(String.valueOf(Role.DIRECTOR));
         addUser(director);
