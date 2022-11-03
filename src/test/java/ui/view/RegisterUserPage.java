@@ -67,7 +67,5 @@ public class RegisterUserPage extends Page{
     public boolean hasEmptyEmail () {
         return emailField.getAttribute("value").isEmpty();
     }
-    public boolean hasEmptyPassword () {
-        return passwordField.getAttribute("value").isEmpty();
-    }
+
 }

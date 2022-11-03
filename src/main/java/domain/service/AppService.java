@@ -5,6 +5,7 @@ import domain.model.Project;
 import domain.model.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class AppService {
     private UserService users = (UserService) new UserServiceDBSQL();
@@ -41,4 +42,7 @@ public class AppService {
     }
 
     public void deleteProject(int id) {projects.deleteProject(id);}
+
+    public void editProject(int id,Date start, Date end) {projects.editProject(id,start,end);
+    }
 }

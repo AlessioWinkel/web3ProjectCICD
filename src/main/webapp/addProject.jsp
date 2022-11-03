@@ -58,13 +58,13 @@
 
                 <p class="form-group ${startClass}">
                     <label class="control-label" for="start">Start datum "yyyy-MM-dd" formaat</label>
-                    <input id="start" name="start" type="text"
+                    <input id="start" name="start" type="date"
                            value="${startPreviousValue}">
                 </p>
 
                 <p class="form-group ${eindeClass}">
                     <label class="control-label" for="einde">Eind datum "yyyy-MM-dd" formaat</label>
-                    <input id="einde" name="einde" type="text"
+                    <input id="einde" name="einde" type="date"
                            value="${eindePreviousValue}" >
                 </p>
 

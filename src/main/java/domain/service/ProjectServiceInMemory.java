@@ -7,6 +7,7 @@ import domain.model.Team;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,6 +31,11 @@ public class ProjectServiceInMemory implements ProjectService {
         projects.put(project.getProjectid(), project);
         projectsArray.add(project);
         projectid++;
+    }
+
+    @Override
+    public void editProject(int id, Date start, Date einde) {
+
     }
 
     @Override

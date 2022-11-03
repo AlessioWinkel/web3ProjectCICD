@@ -10,7 +10,7 @@
 <html>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <head>
-    <title>Title</title>
+    <title>Bekijk alle projecten</title>
 </head>
 <body>
 <div id="container">
@@ -52,13 +52,13 @@
                     <td>${project.end}</td>
 
                     <td>
-                        <a href="Controller?command=editProjectPage&id=${project.projectid}&name=${project.name}" id="pasAanKnop">
+                        <a href="Controller?command=editProjectPage&id=${project.projectid}&name=${project.name}&start=${project.start}&einde=${project.end}" id="pasAanKnop">
                             Pas aan
                         </a>
                     </td>
 
                     <td>
-                        <a href="Controller?command=verwijderConfirmatieProject&id=${project.projectid}&projectNaam=${project.name}" id="verwijderKnop">X</a>
+                        <a href="Controller?command=verwijderConfirmatieProject&id=${project.projectid}&projectNaam=${project.name}&start=" id="verwijderKnop">X</a>
                     </td>
                 </tr>
 

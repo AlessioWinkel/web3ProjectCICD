@@ -9,7 +9,8 @@ public class Project {
     private int projectid;
     private String name;
     private Team team;
-    private Date start,end;
+    private Date start;
+    private Date end;
 
     public Project(String name, Team team, Date start, Date end) {
         setName(name);
@@ -32,6 +33,8 @@ public class Project {
         return start;
     }
 
+
+
     public String getName() {
         return name;
     }
@@ -51,6 +54,7 @@ public class Project {
         if (end.before(this.start)) {
             throw new IllegalArgumentException("Einde datum moet na de startdatum liggen!");
         }
+        this.end = end;
     }
 
     public void setName(String name) {

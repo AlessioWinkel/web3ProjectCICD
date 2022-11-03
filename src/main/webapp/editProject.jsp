@@ -39,12 +39,12 @@
                 </p>
                 <p class="form-group ${startDateClass}">
                     <label class="control-label" for="startDate">Start date</label>
-                    <input id="startDate" name="startDate" type="text">
+                    <input id="startDate" name="startDate" type="date">
                 </p>
 
                 <p class="form-group ${endDateClass}">
                     <label class="control-label" for="endDate">End date</label>
-                    <input id="endDate" name="endDate" type="text">
+                    <input id="endDate" name="endDate" type="date">
                 </p>
 
                 <p><input type="submit" id="update" value="Update"></p>

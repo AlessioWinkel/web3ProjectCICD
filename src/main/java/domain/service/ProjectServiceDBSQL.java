@@ -41,6 +41,20 @@ public class ProjectServiceDBSQL implements ProjectService{
         }
     }
 
+    @Override
+    public void editProject(int id,Date start, Date einde) {
+        String sql = String.format("UPDATE %s.project SET start=?, einde=? WHERE projectid=?", schema);
+        try {
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            statement.setDate(1, new java.sql.Date(start.getTime()));
+            statement.setDate(2, new java.sql.Date(einde.getTime()));
+            statement.setInt(3,id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+    }
+
     public void deleteProject(int id) {
         String sql = String.format("DELETE from %s.project WHERE projectid=?", schema);
         try {
