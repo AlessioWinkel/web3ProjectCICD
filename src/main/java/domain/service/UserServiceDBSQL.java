@@ -13,6 +13,7 @@ import domain.model.Role;
 import domain.model.Team;
 import domain.model.User;
 import domain.util.DbConnectionService;
+import domain.util.PasswordHashing;
 
 public class UserServiceDBSQL implements UserService{
     private final Connection connection;
@@ -31,7 +32,7 @@ public class UserServiceDBSQL implements UserService{
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
             preparedStatement.setString(1, user.getEmail());
-            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(2, PasswordHashing.hashPassword(user.getPassword()));
             preparedStatement.setString(3, user.getFirstName());
             preparedStatement.setString(4, user.getLastName());
             preparedStatement.setString(5, user.getTeamString());

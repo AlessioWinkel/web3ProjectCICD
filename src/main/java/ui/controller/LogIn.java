@@ -1,6 +1,7 @@
 package ui.controller;
 
 import domain.model.User;
+import domain.util.PasswordHashing;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,10 +20,10 @@ public class LogIn extends RequestHandler {
         String email = request.getParameter("email");
         email = email.toLowerCase(Locale.ROOT);
         String password = request.getParameter("password");
+        String passwordHashed = PasswordHashing.hashPassword(password);
         for (User u : service.getAllUsers()) {
             if (u.getEmail().toLowerCase(Locale.ROOT).equals(email)) {
-                if (u.isCorrectPassword(password)) {
-                    session.setAttribute("login","Yes");
+                if (u.isCorrectPassword(passwordHashed)) {
                     session.setAttribute("user", u);
                 } else {
                     request.setAttribute("fout", "No valid email/password");
@@ -31,7 +32,7 @@ public class LogIn extends RequestHandler {
             }
         }
         request.setAttribute("fout", "No valid email/password");
-        return "Controller?command=HomePage";
+        return "Controller?command=Home";
     }
 
 }

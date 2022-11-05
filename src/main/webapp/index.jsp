@@ -14,26 +14,39 @@
 	<div id="container">
 		<header>
 			<jsp:include page="nav.jspf"/>
-
 		</header>
 		<main>
 			<h1>Home</h1>
 
-			<form method="POST" action="Controller?command=LogIn" novalidate>
+			<c:choose>
 
-				<p class="form-group ${EmailClass}">
-					<label class="control-label" for="email">Email</label>
-					<a id="email" name="email">${param.name}</a>
-				</p>
-				<p class="form-group ${passwordClass}">
-					<label class="control-label" for="password">Password</label>
-					<input id="password" name="password" type="password">
-				</p>
+				<%-- user is logged in -- show welcome and logout form --%>
+				<c:when test="${sessionScope.user!=null}">
 
+					<p>Welcome, ${user.firstName }</p>
+					<form action="Controller?command=LogOut" method="POST">
+						<input type="submit" id="LogOut" value="Log Out">
+					</form>
+				</c:when>
+				<c:otherwise>
+					<%-- no user is logged in -- show login form --%>
+					<p>Please log in.</p>
+					<form method="POST" action="Controller?command=LogIn" novalidate>
 
-				<p><input type="submit" id="logIn" value="Log In"></p>
+						<p class="form-group">
+							<label class="control-label" for="email">Email</label>
+							<input id="email" name="email" type="text">
+						</p>
+						<p class="form-group">
+							<label class="control-label" for="password">Password</label>
+							<input id="password" name="password" type="password">
+						</p>
 
-			</form>
+						<p><input type="submit" id="logIn" value="Log In"></p>
+
+					</form>
+				</c:otherwise>
+			</c:choose>
 
 		</main>
 	</div>

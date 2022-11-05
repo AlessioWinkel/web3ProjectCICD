@@ -22,7 +22,7 @@ GRANT ALL ON TABLE groep301.user TO local_r0877579;
 INSERT INTO groep301.user ("userid","email","password","first_name","last_name","team","role") values (1, 'alessio@gmail.com', "lalala","alessio","winkel","ALPHA","EMPLOYEE");
 
 -- grant aan teamgenoot
-GRANT ALL ON SCHEMA groep3O1 TO local_r0842359;
+GRANT ALL ON SCHEMA groep301 TO local_r0842359;
 GRANT ALL ON SEQUENCE groep301.user_id_seq TO local_r0842359;
 GRANT ALL ON TABLE groep301.user TO local_0842359;
 

@@ -3,6 +3,7 @@ package ui.controller;
 import domain.exceptions.DbException;
 import domain.exceptions.DomainException;
 import domain.model.User;
+import domain.util.PasswordHashing;
 import ui.controller.RequestHandler;
 
 import javax.servlet.http.HttpServletRequest;
@@ -90,17 +91,13 @@ public class registerUser extends RequestHandler {
     private void setPassword(User user, HttpServletRequest request, ArrayList<String> errors) {
         String password = request.getParameter("password");
         try {
-            user.setPwdHashed(password);
+            user.setPassword(password);
             request.setAttribute("passwordClass", "has-success");
             request.setAttribute("passwordPreviousValue", password);
         }
         catch (IllegalArgumentException exc) {
             errors.add(exc.getMessage());
             request.setAttribute("passwordClass", "has-error");
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
         }
 
     }

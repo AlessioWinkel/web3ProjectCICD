@@ -9,6 +9,6 @@ public class LogOut extends RequestHandler {
 
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.getSession().invalidate();
-        return "Controller?command=Home";
+        return "Controller?action=Home";
     }
 }

@@ -37,12 +37,12 @@
                     <label class="control-label" for="projectName">Project Name:</label>
                     <a id="projectName" name="projectName">${param.name}</a>
                 </p>
-                <p class="form-group ${startDateClass}">
+                <p class="form-group ${startClass}">
                     <label class="control-label" for="startDate">Start date</label>
                     <input id="startDate" name="startDate" type="date">
                 </p>
 
-                <p class="form-group ${endDateClass}">
+                <p class="form-group ${eindeClass}">
                     <label class="control-label" for="endDate">End date</label>
                     <input id="endDate" name="endDate" type="date">
                 </p>

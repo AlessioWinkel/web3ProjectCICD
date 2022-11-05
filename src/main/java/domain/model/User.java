@@ -1,6 +1,7 @@
 package domain.model;
 
 import domain.exceptions.DomainException;
+import domain.util.PasswordHashing;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
@@ -21,7 +22,7 @@ public class User {
 
     public User(String email, String password, String firstName, String lastName, Team team) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         setEmail(email);
-        setPwdHashed(password);
+        setPassword(password);
         setFirstName(firstName);
         setLastName(lastName);
         setTeam(team);
@@ -30,7 +31,7 @@ public class User {
     }
     public User(String email, String password, String firstName, String lastName, Team team,String role) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         setEmail(email);
-        setPwdHashed(password);
+        setPassword(password);
         setFirstName(firstName);
         setLastName(lastName);
         setTeam(team);
@@ -40,7 +41,7 @@ public class User {
 
 
     public User(int userid, String email, String password, String firstName, String lastName, Team team,String role) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        this(email, sha512(password), firstName, lastName, team,role);
+        this(email, password, firstName, lastName, team,role);
         this.setUserid(userid);
     }
 
@@ -63,23 +64,11 @@ public class User {
     }
 
     private static String sha512(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        MessageDigest crypt = MessageDigest.getInstance("SHA-512");
-        crypt.reset();
 
-        // encrypts
-        crypt.update(password.getBytes("UTF-8"));
-
-        //16 hexadecimal system the sixteen digits are "0–9" followed by "A–F".
-        String hashedPassword = new BigInteger(1, crypt.digest()).toString(16);
-        System.out.println(hashedPassword.length());
-        return hashedPassword;
+        return PasswordHashing.hashPassword(password);
     }
 
 
-    public void setPwdHashed(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-
-        setPassword(sha512(password));
-    }
 
     public void setEmail(String email) {
         if (email.isEmpty()) {
