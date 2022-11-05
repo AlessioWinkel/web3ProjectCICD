@@ -19,6 +19,22 @@
 		<main>
 			<h1>Home</h1>
 
+			<form method="POST" action="Controller?command=LogIn" novalidate>
+
+				<p class="form-group ${EmailClass}">
+					<label class="control-label" for="email">Email</label>
+					<a id="email" name="email">${param.name}</a>
+				</p>
+				<p class="form-group ${passwordClass}">
+					<label class="control-label" for="password">Password</label>
+					<input id="password" name="password" type="password">
+				</p>
+
+
+				<p><input type="submit" id="logIn" value="Log In"></p>
+
+			</form>
+
 		</main>
 	</div>
 </body>

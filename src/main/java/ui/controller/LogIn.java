@@ -9,60 +9,29 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class LogIn extends RequestHandler {
 
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, NoSuchAlgorithmException {
-        ArrayList<String> errors = new ArrayList<>();
-
-        login(request,response,errors);
-        if (errors.size() == 0){
-
-            return "index.jsp";
-        }
-        else {
-            request.setAttribute("errors", errors);
-            return "index.jsp";
-        }
-    }
-
-    private void login(HttpServletRequest request, HttpServletResponse response, ArrayList<String> errors) throws IOException, NoSuchAlgorithmException {
-
-        ArrayList<User> values = new ArrayList(service.getAllUsers());
-        request.setAttribute("users", values);
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
         HttpSession session = request.getSession();
-
-        if (email.isEmpty()){
-            errors.add("No e-mail given.");
-        }
-        if (!email.isEmpty() && !values.contains(email)){
-            errors.add("Unkown e-mail.");
-        }
-
-        if (!email.isEmpty() && values.contains(email)){
-            for(User u : values){
-                if (u != null){
-                    if (u.getEmail().equalsIgnoreCase(email)){
-
-                        if (!password.isEmpty() && u.isPasswordCorrect(password)){
-
-                           // TO DO
-                        }
-                         else if (!password.isEmpty() && !u.isCorrectPassword(password)){
-                             errors.add("Wrong password");
-                         }
-                    }
+        String email = request.getParameter("email");
+        email = email.toLowerCase(Locale.ROOT);
+        String password = request.getParameter("password");
+        for (User u : service.getAllUsers()) {
+            if (u.getEmail().toLowerCase(Locale.ROOT).equals(email)) {
+                if (u.isCorrectPassword(password)) {
+                    session.setAttribute("login","Yes");
+                    session.setAttribute("user", u);
+                } else {
+                    request.setAttribute("fout", "No valid email/password");
                 }
+                return "Controller?command=Home";
             }
         }
-
-        if (password.isEmpty()){
-            errors.add("No password given.");
-        }
-
+        request.setAttribute("fout", "No valid email/password");
+        return "Controller?command=HomePage";
     }
 
 }

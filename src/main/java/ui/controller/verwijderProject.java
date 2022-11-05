@@ -14,6 +14,6 @@ public class verwijderProject extends RequestHandler {
         request.setAttribute("service",service);
         int id = Integer.parseInt(request.getParameter("id"));
         service.deleteProject(id);
-        return "projectOverview.jsp";
+        return "Controller?command=projectOverview";
     }
 }

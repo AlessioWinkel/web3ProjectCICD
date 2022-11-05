@@ -13,6 +13,6 @@ public class verwijder extends RequestHandler {
         request.setAttribute("users",service.getAllUsers());
         int id = Integer.parseInt(request.getParameter("id"));
         service.deleteUser(id);
-        return "useroverview.jsp";
+        return "Controller?command=userOverview";
     }
 }

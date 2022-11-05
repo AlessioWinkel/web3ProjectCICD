@@ -8,9 +8,7 @@ import java.io.IOException;
 public class LogOut extends RequestHandler {
 
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-        session.invalidate();
-
-        return "index.jsp";
+        request.getSession().invalidate();
+        return "Controller?command=Home";
     }
 }
