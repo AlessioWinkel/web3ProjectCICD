@@ -37,6 +37,9 @@ public class AppService {
     public boolean zelfdeEmails(String email) {
         return users.zelfdeEmails(email);
     }
+    public boolean zelfdeEmails2(String email) {
+        return users.zelfdeEmails(email);
+    }
 
     public boolean zelfdeProjectNaam(String projectNaam) {return projects.zelfdeProjectNaam(projectNaam);}
 

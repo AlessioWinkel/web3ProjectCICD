@@ -83,10 +83,12 @@ public class updateUser extends RequestHandler {
     }
 
     private void setEmail(User user, HttpServletRequest request, ArrayList<String> errors) {
-
+        String original = request.getParameter("email");
         String email = request.getParameter("emailInput");
-        if (service.zelfdeEmails(email)) {
-            errors.add("Er is al een account met dezelfde mail.");
+        if (!original.equals(email)) {
+            if (service.zelfdeEmails(email)); {
+                errors.add("Er is al een account met dezelfde email.");
+            }
         }
         try {
             user.setEmail(email);

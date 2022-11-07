@@ -44,7 +44,7 @@ Register
                     <p class="form-group ${lastNameClass}">
                         <label class="control-label" for="lastName">Last name</label>
                         <input id="lastName" name="lastName" type="text"
-                               value="${lastPreviousValue}" >
+                               value="${lastNamePreviousValue}" >
                     </p>
 
                     <p class="form-group ${emailClass}">

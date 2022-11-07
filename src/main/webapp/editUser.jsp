@@ -32,7 +32,7 @@
             </c:if>
             <h2>Registreer je</h2>
 
-            <form method="POST" action="Controller?command=updateUser&id=${param.id}" novalidate>
+            <form method="POST" action="Controller?command=updateUser&id=${param.id}&email=${param.email}" novalidate>
 
                 <p class="form-group ${firstNameClass}">
                     <label class="control-label" for="firstNameInput">First name</label>

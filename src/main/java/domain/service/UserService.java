@@ -19,4 +19,5 @@ public interface UserService {
     User findUserWithId(int id);
 
     boolean zelfdeEmails(String email);
+
 }
