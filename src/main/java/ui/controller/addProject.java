@@ -39,6 +39,9 @@ public class addProject extends RequestHandler {
 
     private void setProjectNaam(Project project, HttpServletRequest request, ArrayList<String> errors) {
         String projectNaam = request.getParameter("projectNaam");
+        if (service.zelfdeProjectNaam(projectNaam)) {
+            errors.add("Er is al een project met dezelfde naam.");
+        }
         try {
             project.setName(projectNaam);
             request.setAttribute("projectNaamClass", "has-success");

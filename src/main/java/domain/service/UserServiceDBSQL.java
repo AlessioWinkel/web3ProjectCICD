@@ -161,7 +161,7 @@ public class UserServiceDBSQL implements UserService{
                 count++;
             }
         }
-        if (count > 1) {
+        if (count > 0) {
             zelfde = true;
         }
         return zelfde;
@@ -180,6 +180,7 @@ public class UserServiceDBSQL implements UserService{
 
     @Override
     public void updateUser(int id,String firstName, String lastName, String email, String team, String role) {
+
         String sql = String.format("UPDATE %s.user SET first_name=?, last_name=?, email=?, team=?, role=? WHERE userid=?", schema);
         try {
             PreparedStatement statement = getConnection().prepareStatement(sql);
@@ -190,6 +191,7 @@ public class UserServiceDBSQL implements UserService{
             statement.setString(5, role);
             statement.setInt(6,id);
             statement.executeUpdate();
+
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         }

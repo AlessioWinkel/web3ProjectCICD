@@ -1,6 +1,8 @@
 package domain.model;
 
 import domain.exceptions.DomainException;
+import domain.service.ProjectServiceDBSQL;
+import domain.service.UserServiceDBSQL;
 import domain.util.PasswordHashing;
 
 import java.io.UnsupportedEncodingException;
@@ -18,6 +20,8 @@ public class User {
     private String lastName;
     private Team team;
     private Role role;
+
+
 
 
     public User(String email, String password, String firstName, String lastName, Team team) throws UnsupportedEncodingException, NoSuchAlgorithmException {
@@ -74,6 +78,7 @@ public class User {
         if (email.isEmpty()) {
             throw new IllegalArgumentException("No email given");
         }
+
 
         String USERID_PATTERN =
                 "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"

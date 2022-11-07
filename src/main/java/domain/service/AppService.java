@@ -38,6 +38,8 @@ public class AppService {
         return users.zelfdeEmails(email);
     }
 
+    public boolean zelfdeProjectNaam(String projectNaam) {return projects.zelfdeProjectNaam(projectNaam);}
+
     public Object getNumberOfProjects() { return projects.getNumberOfProjects();
     }
 

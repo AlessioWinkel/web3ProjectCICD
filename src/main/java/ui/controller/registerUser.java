@@ -76,6 +76,9 @@ public class registerUser extends RequestHandler {
 
     private void setEmail(User user, HttpServletRequest request, ArrayList<String> errors) {
         String email = request.getParameter("email");
+        if (service.zelfdeEmails(email)) {
+            errors.add("Er is al een account met dezelfde mail.");
+        }
         try {
             user.setEmail(email);
             request.setAttribute("emailClass", "has-success");

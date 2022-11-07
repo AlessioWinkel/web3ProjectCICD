@@ -6,6 +6,8 @@ import domain.model.Team;
 import domain.model.User;
 import domain.util.DbConnectionService;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -159,6 +161,48 @@ public class ProjectServiceDBSQL implements ProjectService{
             throw new RuntimeException(e);
         }
         return projects.size();
+    }
+
+    public boolean zelfdeProjectNaam(String naamProject) {
+
+        ArrayList<Project> projects = new ArrayList<>();
+        String sql = String.format("SELECT * from %s.project", schema);
+        try {
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                int id = result.getInt("projectid");
+                String naam = result.getString("naam");
+                String teamString = result.getString("team");
+                Team team = Team.valueOf(teamString.toUpperCase());
+                Date start = new SimpleDateFormat("yyyy-dd-MM").parse(result.getString("start"));
+                if (result.getString("einde") == null) {
+                    projects.add(new Project(id,naam,team,start,null));
+                } else {
+                    Date einde = new SimpleDateFormat("yyyy-dd-MM").parse(result.getString("einde"));
+                    projects.add(new Project(id,naam,team,start,einde));
+                }
+
+
+
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        boolean zelfde = false;
+        int count = 0;
+        for (Project project : projects) {
+            if (project.getName().equals(naamProject)) {
+                count++;
+            }
+        }
+        if (count > 0) {
+            zelfde = true;
+        }
+        return zelfde;
     }
 
     public Connection getConnection() {

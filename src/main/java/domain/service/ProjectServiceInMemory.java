@@ -50,6 +50,11 @@ public class ProjectServiceInMemory implements ProjectService {
     }
 
     @Override
+    public boolean zelfdeProjectNaam(String projectNaam) {
+        return false;
+    }
+
+    @Override
     public ArrayList<Project> getAllProjects() {
         return projectsArray;
     }

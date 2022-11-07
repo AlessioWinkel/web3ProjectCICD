@@ -12,6 +12,8 @@ public interface ProjectService {
     void editProject(int id,Date start, Date einde);
     Project findProjectWithId(int id);
 
+    boolean zelfdeProjectNaam(String projectNaam);
+
     ArrayList<Project> getAllProjects();
 
     Object getNumberOfProjects();
