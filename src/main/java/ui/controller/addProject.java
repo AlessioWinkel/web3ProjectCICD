@@ -72,9 +72,14 @@ public class addProject extends RequestHandler {
         String dateFromHtml = request.getParameter("start");
         String dateTimeFromHtml = request.getParameter("startTime");
         String dateAndTime = (dateFromHtml + " " + dateTimeFromHtml);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
-        Timestamp dateTimeStamp = Timestamp.valueOf(dateTime);
+        Timestamp dateTimeStamp;
+        if (dateAndTime.equals(" ")) {
+            dateTimeStamp = null;
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
+            dateTimeStamp = Timestamp.valueOf(dateTime);
+        }
         try {
             project.setStart(dateTimeStamp);
             request.setAttribute("startClass", "has-success");
@@ -90,9 +95,14 @@ public class addProject extends RequestHandler {
         String dateFromHtml = request.getParameter("einde");
         String dateTimeFromHtml = request.getParameter("eindeTime");
         String dateAndTime = (dateFromHtml + " " + dateTimeFromHtml);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
-        Timestamp dateTimeStamp = Timestamp.valueOf(dateTime);
+        Timestamp dateTimeStamp;
+        if (dateAndTime.equals(" ")) {
+            dateTimeStamp = null;
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
+            dateTimeStamp = Timestamp.valueOf(dateTime);
+        }
         try {
             project.setEnd(dateTimeStamp);
             request.setAttribute("eindeClass", "has-success");

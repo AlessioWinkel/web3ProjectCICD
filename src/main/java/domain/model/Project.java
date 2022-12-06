@@ -53,9 +53,12 @@ public class Project {
 
 
     public void setEnd(Timestamp end) {
-        if (end.before(this.start)) {
-            throw new IllegalArgumentException("Einde datum moet na de startdatum liggen!");
+        if (end != null) {
+            if (end.before(this.start)) {
+                throw new IllegalArgumentException("Einde datum moet na de startdatum liggen!");
+            }
         }
+
         this.end = end;
     }
 
