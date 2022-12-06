@@ -8,10 +8,7 @@ import domain.util.DbConnectionService;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,8 +31,8 @@ public class ProjectServiceDBSQL implements ProjectService{
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
             preparedStatement.setString(1, project.getName());
             preparedStatement.setString(2, project.getTeamString());
-            preparedStatement.setDate(3, new java.sql.Date(project.getStart().getTime()));
-            preparedStatement.setDate(4, new java.sql.Date(project.getEnd().getTime()));
+            preparedStatement.setTimestamp(3, project.getStart());
+            preparedStatement.setTimestamp(4, project.getEnd());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -44,12 +41,12 @@ public class ProjectServiceDBSQL implements ProjectService{
     }
 
     @Override
-    public void editProject(int id,Date start, Date einde) {
+    public void editProject(int id, Timestamp start, Timestamp einde) {
         String sql = String.format("UPDATE %s.project SET start=?, einde=? WHERE projectid=?", schema);
         try {
             PreparedStatement statement = getConnection().prepareStatement(sql);
-            statement.setDate(1, new java.sql.Date(start.getTime()));
-            statement.setDate(2, new java.sql.Date(einde.getTime()));
+            statement.setTimestamp(1, start);
+            statement.setTimestamp(2, einde);
             statement.setInt(3,id);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -81,18 +78,16 @@ public class ProjectServiceDBSQL implements ProjectService{
                 String naam = result.getString("naam");
                 String teamString = result.getString("team");
                 Team team = Team.valueOf(teamString.toUpperCase());
-                Date start = new SimpleDateFormat("yyyy-dd-MM").parse(result.getString("start"));
-                if (result.getString("einde") == null) {
+                Timestamp start =  result.getTimestamp("start");
+                if (result.getTimestamp("einde") == null) {
                     projects.add(new Project(id,naam,team,start,null));
                 } else {
-                    Date einde = new SimpleDateFormat("yyyy-dd-MM").parse(result.getString("einde"));
+                    Timestamp einde = result.getTimestamp("einde");
                     projects.add(new Project(id2,naam,team,start,einde));
                 }
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
         }
         if (id <=0)
             throw new IllegalArgumentException("Foute id ingegeven");
@@ -116,11 +111,11 @@ public class ProjectServiceDBSQL implements ProjectService{
                 String naam = result.getString("naam");
                 String teamString = result.getString("team");
                 Team team = Team.valueOf(teamString.toUpperCase());
-                Date start = new SimpleDateFormat("yyyy-dd-MM").parse(result.getString("start"));
-                if (result.getString("einde") == null) {
+                Timestamp start =  result.getTimestamp("start");
+                if (result.getTimestamp("einde") == null) {
                     projects.add(new Project(id,naam,team,start,null));
                 } else {
-                    Date einde = new SimpleDateFormat("yyyy-dd-MM").parse(result.getString("einde"));
+                    Timestamp einde = result.getTimestamp("einde");
                     projects.add(new Project(id,naam,team,start,einde));
                 }
 
@@ -129,8 +124,6 @@ public class ProjectServiceDBSQL implements ProjectService{
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
         }
         return projects;
     }
@@ -147,19 +140,17 @@ public class ProjectServiceDBSQL implements ProjectService{
                 String naam = result.getString("naam");
                 String teamString = result.getString("team");
                 Team team = Team.valueOf(teamString.toUpperCase());
-                Date start = new SimpleDateFormat("yyyy-dd-MM").parse(result.getString("start"));
-                if (result.getString("einde") == null) {
+                Timestamp start =  result.getTimestamp("start");
+                if (result.getTimestamp("einde") == null) {
                     projects.add(new Project(id,naam,team,start,null));
                 } else {
-                    Date einde = new SimpleDateFormat("yyyy-dd-MM").parse(result.getString("einde"));
+                    Timestamp einde = result.getTimestamp("einde");
                     projects.add(new Project(id,naam,team,start,einde));
                 }
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        } 
         return projects.size();
     }
 
@@ -175,21 +166,17 @@ public class ProjectServiceDBSQL implements ProjectService{
                 String naam = result.getString("naam");
                 String teamString = result.getString("team");
                 Team team = Team.valueOf(teamString.toUpperCase());
-                Date start = new SimpleDateFormat("yyyy-dd-MM").parse(result.getString("start"));
-                if (result.getString("einde") == null) {
+                Timestamp start =  result.getTimestamp("start");
+                if (result.getTimestamp("einde") == null) {
                     projects.add(new Project(id,naam,team,start,null));
                 } else {
-                    Date einde = new SimpleDateFormat("yyyy-dd-MM").parse(result.getString("einde"));
+                    Timestamp einde = result.getTimestamp("einde");
                     projects.add(new Project(id,naam,team,start,einde));
                 }
-
-
 
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
         }
 
         boolean zelfde = false;

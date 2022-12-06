@@ -60,12 +60,16 @@
                     <label class="control-label" for="start">Start datum "yyyy-MM-dd" formaat</label>
                     <input id="start" name="start" type="date"
                            value="${startPreviousValue}">
+                    <input id="startTime" name="startTime" type="time"
+                           value="${startTimePreviousValue}" >
                 </p>
 
                 <p class="form-group ${eindeClass}">
                     <label class="control-label" for="einde">Eind datum "yyyy-MM-dd" formaat</label>
                     <input id="einde" name="einde" type="date"
                            value="${eindePreviousValue}" >
+                    <input id="eindeTime" name="eindeTime" type="time"
+                           value="${eindeTimePreviousValue}" >
                 </p>
 
                 <p><input type="submit" id="signUp" value="Sign Up"></p>

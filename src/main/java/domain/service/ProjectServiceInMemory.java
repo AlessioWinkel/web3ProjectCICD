@@ -5,6 +5,7 @@ import domain.model.Project;
 import domain.model.Team;
 
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,7 +35,7 @@ public class ProjectServiceInMemory implements ProjectService {
     }
 
     @Override
-    public void editProject(int id, Date start, Date einde) {
+    public void editProject(int id, Timestamp start, Timestamp einde) {
 
     }
 

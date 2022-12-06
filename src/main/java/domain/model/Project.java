@@ -2,6 +2,8 @@ package domain.model;
 
 import domain.exceptions.DomainException;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -9,10 +11,10 @@ public class Project {
     private int projectid;
     private String name;
     private Team team;
-    private Date start;
-    private Date end;
+    private Timestamp start;
+    private Timestamp end;
 
-    public Project(String name, Team team, Date start, Date end) {
+    public Project(String name, Team team, Timestamp start, Timestamp end) {
         setName(name);
         setStart(start);
         setEnd(end);
@@ -25,11 +27,11 @@ public class Project {
         return projectid;
     }
 
-    public Date getEnd() {
+    public Timestamp getEnd() {
         return end;
     }
 
-    public Date getStart() {
+    public Timestamp getStart() {
         return start;
     }
 
@@ -43,14 +45,14 @@ public class Project {
         return team;
     }
 
-    public Project(int projectid, String name, Team team, Date start, Date end) {
+    public Project(int projectid, String name, Team team, Timestamp start, Timestamp end) {
         this(name,team,start,end);
         this.setProjectid(projectid);
     }
 
 
 
-    public void setEnd(Date end) {
+    public void setEnd(Timestamp end) {
         if (end.before(this.start)) {
             throw new IllegalArgumentException("Einde datum moet na de startdatum liggen!");
         }
@@ -64,7 +66,7 @@ public class Project {
         this.name = name;
     }
 
-    public void setStart(Date start) {
+    public void setStart(Timestamp start) {
         if (start == null) {
             throw new IllegalArgumentException("Datum mag niet leeg zijn");
         }

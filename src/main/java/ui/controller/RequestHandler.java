@@ -7,11 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
 
 public abstract class RequestHandler {
     protected AppService service;
 
-    public abstract String handleRequest (HttpServletRequest request, HttpServletResponse response) throws IOException, NoSuchAlgorithmException;
+    public abstract String handleRequest (HttpServletRequest request, HttpServletResponse response) throws IOException, NoSuchAlgorithmException, ParseException;
 
     public AppService getService() {
         return service;

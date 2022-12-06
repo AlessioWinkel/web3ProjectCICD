@@ -4,6 +4,7 @@ import domain.service.AppService;
 
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -37,7 +38,7 @@ public class Controller extends HttpServlet {
             RequestHandler handler = handlerFactory.getHandler(command, service);
             try {
                 destination = handler.handleRequest(request, response);
-            } catch (NoSuchAlgorithmException e) {
+            } catch (NoSuchAlgorithmException | ParseException e) {
                 e.printStackTrace();
             }
         }

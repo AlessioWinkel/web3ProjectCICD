@@ -40,11 +40,14 @@
                 <p class="form-group ${startClass}">
                     <label class="control-label" for="startDate">Start date</label>
                     <input id="startDate" name="startDate" type="date">
+                    <input id="startTime" name="startTime" type="time">
+
                 </p>
 
                 <p class="form-group ${eindeClass}">
                     <label class="control-label" for="endDate">End date</label>
                     <input id="endDate" name="endDate" type="date">
+                    <input id="eindeTime" name="eindeTime" type="time">
                 </p>
 
                 <p><input type="submit" id="update" value="Update"></p>

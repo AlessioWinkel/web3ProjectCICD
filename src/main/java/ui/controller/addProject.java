@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class addProject extends RequestHandler {
@@ -66,32 +69,39 @@ public class addProject extends RequestHandler {
         }
     }
     private void setProjectStart(Project project, HttpServletRequest request, ArrayList<String> errors) {
-        String start = request.getParameter("start");
+        String dateFromHtml = request.getParameter("start");
+        String dateTimeFromHtml = request.getParameter("startTime");
+        String dateAndTime = (dateFromHtml + " " + dateTimeFromHtml);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
+        Timestamp dateTimeStamp = Timestamp.valueOf(dateTime);
         try {
-            project.setStart(new SimpleDateFormat("yyyy-dd-MM").parse(request.getParameter("start")));
+            project.setStart(dateTimeStamp);
             request.setAttribute("startClass", "has-success");
-            request.setAttribute("startPreviousValue", start);
+            request.setAttribute("startPreviousValue", dateTimeStamp);
         }
         catch (IllegalArgumentException exc) {
             errors.add(exc.getMessage());
             request.setAttribute("startClass", "has-error");
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
         }
     }
 
     private void setProjectEinde(Project project, HttpServletRequest request, ArrayList<String> errors) {
-        String einde = request.getParameter("einde");
+        String dateFromHtml = request.getParameter("einde");
+        String dateTimeFromHtml = request.getParameter("eindeTime");
+        String dateAndTime = (dateFromHtml + " " + dateTimeFromHtml);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
+        Timestamp dateTimeStamp = Timestamp.valueOf(dateTime);
         try {
-            project.setEnd(new SimpleDateFormat("yyyy-dd-MM").parse(request.getParameter("einde")));
+            project.setEnd(dateTimeStamp);
             request.setAttribute("eindeClass", "has-success");
-            request.setAttribute("eindePreviousValue", einde);
+            request.setAttribute("eindePreviousValue", dateTimeStamp);
+
         }
         catch (IllegalArgumentException exc) {
             errors.add(exc.getMessage());
             request.setAttribute("eindeClass", "has-error");
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
         }
     }
 

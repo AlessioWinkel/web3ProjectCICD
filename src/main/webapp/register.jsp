@@ -22,7 +22,6 @@ Register
 
 
         <div id="container2">
-            <main>
                 <c:if test="${not empty errors}">
                     <div class="alert alert-danger">
                         <ul>

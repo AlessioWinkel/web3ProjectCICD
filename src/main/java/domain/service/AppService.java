@@ -3,13 +3,21 @@ package domain.service;
 
 import domain.model.Project;
 import domain.model.User;
+import domain.model.WorkOrder;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class AppService {
-    private UserService users = (UserService) new UserServiceDBSQL();
+
+    private WorkOrderService workorders = new WorkOrderServiceDBSQL();
+    private UserService users = new UserServiceDBSQL();
     private ProjectService projects = new ProjectServiceDBSQL();
+
+    public void addWorkOrder(WorkOrder workOrder) {workorders.addWorkOrder(workOrder);}
+
+    public ArrayList<WorkOrder> getAllWorkOrders() {return workorders.getAllWorkOrders();}
 
     public void addProject(Project project) {projects.addProject(project);}
 
@@ -48,6 +56,6 @@ public class AppService {
 
     public void deleteProject(int id) {projects.deleteProject(id);}
 
-    public void editProject(int id,Date start, Date end) {projects.editProject(id,start,end);
+    public void editProject(int id, Timestamp start, Timestamp end) {projects.editProject(id,start,end);
     }
 }
