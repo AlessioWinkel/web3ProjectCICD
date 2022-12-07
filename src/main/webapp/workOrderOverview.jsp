@@ -8,8 +8,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
 <head>
     <title>Work Order Overview</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 <header>
@@ -27,42 +29,20 @@
         <c:choose>
             <c:when test="${aantalWorkOrders > 0}">
 
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Project Id</th>
-                        <th>Name</th>
-                        <th>Team</th>
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Pas aan</th>
-                        <th>Verwijder</th>
 
-                    </thead>
-                    <tbody>
-                    <c:forEach var="project"  items="${projects}">
-                        <tr>
-                            <td>${project.projectid}</td>
-                            <td>${project.name}</td>
-                            <td>${project.team}</td>
-                            <td>${project.start}</td>
-                            <td>${project.end}</td>
+                    <c:forEach var="workOrder"  items="${workOrders}">
+                        <section class="workOrderContainer">
 
-                            <td>
-                                <a href="Controller?command=editProjectPage&id=${project.projectid}&name=${project.name}&start=${project.start}&einde=${project.end}" id="pasAanKnop">
-                                    Pas aan
-                                </a>
-                            </td>
-
-                            <td>
-                                <a href="Controller?command=verwijderConfirmatieProject&id=${project.projectid}&projectNaam=${project.name}&start=" id="verwijderKnop">X</a>
-                            </td>
-                        </tr>
+                            <p>Order: ${workOrder.workorderid}</p>
+                            <p>Employee: ${workOrder.username}</p>
+                            <p>Date: ${workOrder.date}</p>
+                            <p>Time:${workOrder.start} to ${workOrder.end}</p>
+                            <p>Duration: ${workOrder.duration} minutes</p>
+                            <p>Description: ${workOrder.description}</p>
+                        </section>
 
                     </c:forEach>
-                    </tbody>
-                    <caption>Projects Overview</caption>
-                </table>
+
             </c:when>
             <c:otherwise>
                 <p>Er zijn nog geen Projects.</p>

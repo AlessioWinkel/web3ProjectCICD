@@ -5,6 +5,7 @@ import domain.model.Project;
 import domain.model.User;
 import domain.model.WorkOrder;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,8 @@ public class AppService {
     private ProjectService projects = new ProjectServiceDBSQL();
 
     public void addWorkOrder(WorkOrder workOrder) {workorders.addWorkOrder(workOrder);}
+
+    public void editWorkOrder(int id, Timestamp date, Time start, Time einde, String description) {workorders.editWorkOrder(id, date,start,einde,description);}
 
     public ArrayList<WorkOrder> getAllWorkOrders() {return workorders.getAllWorkOrders();}
 
@@ -31,6 +34,7 @@ public class AppService {
     public void updateUser(int id,String firstName, String lastName, String email, String team, String role) {
         users.updateUser(id,firstName,lastName,email,team,role);
     }
+
 
     public User findUserWithId(int id) {
         return users.findUserWithId(id);

@@ -10,9 +10,14 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body><c:choose>
+<body>
+<header>
+    <jsp:include page="nav.jspf"/>
+</header>
 
+<c:choose>
     <%-- user is logged in -- show welcome and logout form --%>
     <c:when test="${sessionScope.user!=null}">
         <c:if test="${not empty errors}">
@@ -58,9 +63,22 @@
         </form>
     </c:when>
     <c:otherwise>
-        <%-- no user is logged in --%>
-        <p>Please log in to add and view work orders</p>
+        <%-- no user is logged in -- show login form --%>
+        <p>Please log in.</p>
+        <form method="POST" action="Controller?command=LogIn" novalidate>
 
+            <p class="form-group">
+                <label class="control-label" for="email">Email</label>
+                <input id="email" name="email" type="text">
+            </p>
+            <p class="form-group">
+                <label class="control-label" for="password">Password</label>
+                <input id="password" name="password" type="password">
+            </p>
+
+            <p><input type="submit" id="logIn" value="Log In"></p>
+
+        </form>
     </c:otherwise>
 </c:choose>
 

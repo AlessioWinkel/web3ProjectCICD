@@ -38,16 +38,34 @@ public class WorkOrderServiceDBSQL implements WorkOrderService{
                 String teamString = result.getString("userteam");
                 Team team = Team.valueOf(teamString.toUpperCase());
                 Timestamp datum = result.getTimestamp("datum");
-                Time start = result.getTime("start");
-                Time einde = result.getTime("einde");
+                Time start = result.getTime("start_time");
+                Time einde = result.getTime("end_time");
                 String description = result.getString("description");
                 workorders.add(new WorkOrder(workorderId,userId,username,team,datum,start,einde,description));
 
             }
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
         return workorders;
+    }
+
+    @Override
+    public void editWorkOrder(int id,Timestamp date, Time start, Time einde, String description) {
+        String sql = String.format("UPDATE %s.workorder SET date=?, start_time=?, end_time=?, description=? WHERE workorder_id=?", schema);
+        try {
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            statement.setTimestamp(1, date);
+            statement.setTime(2, start);
+            statement.setTime(3,einde);
+            statement.setString(4,description);
+            statement.setInt(5, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
     }
 
     @Override

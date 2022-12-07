@@ -4,6 +4,9 @@ import domain.exceptions.DomainException;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class WorkOrder {
     private int workorderid,userid;
@@ -15,28 +18,29 @@ public class WorkOrder {
     private String description;
 
 
-    public WorkOrder(int userid,String username, Team team,Timestamp date, Time start, Time end, String description) {
-        setDescription(description);
-        setEnd(end);
+    public WorkOrder(int userid,String username, Team team,Timestamp date, Time start, Time end, String description) throws ParseException {
+        setDate(date);
         setStart(start);
+        setEnd(end);
         setUsername(username);
         setUserid(userid);
         setTeam(team);
-        setDate(date);
         setDuration(start,end);
+        setDescription(description);
     }
     public WorkOrder() {};
 
-    public WorkOrder(int workorderid, int userid,String username, Team team,Timestamp date, Time start, Time end, String description) {
-        setDescription(description);
+    public WorkOrder(int workorderid, int userid,String username, Team team,Timestamp date, Time start, Time end, String description) throws ParseException {
+
+        setWorkorderid(workorderid);
         setDate(date);
-        setEnd(end);
         setStart(start);
+        setEnd(end);
         setUsername(username);
         setUserid(userid);
-        setWorkorderid(workorderid);
         setTeam(team);
         setDuration(start,end);
+        setDescription(description);
     }
 
 
@@ -45,28 +49,36 @@ public class WorkOrder {
     }
 
     public void setStart(Time start) {
+        if (start == null) throw new IllegalArgumentException("Starttijd mag niet leeg zijn");
         this.start = start;
     }
 
-    public void setEnd(Time end) {
-        if (end.toLocalTime().isBefore(this.start.toLocalTime())) {
-            throw new IllegalArgumentException("End time must be before start!");
-        }
+    public void setEnd(Time end) throws ParseException {
+        if (end == null) throw new IllegalArgumentException("Eindtijd mag niet leeg zijn");
+        SimpleDateFormat simpleDateFormat
+                = new SimpleDateFormat("HH:mm:ss");
+        Date date1 = simpleDateFormat.parse(String.valueOf(this.start));
+        Date date2 = simpleDateFormat.parse(String.valueOf(end));
+        if (date2.before(date1)) throw new IllegalArgumentException("Eind tijd moet na starttijd liggen!");
         this.end = end;
     }
 
     public void setDescription(String description) {
-        if (description.length() > 100) {
-            throw new IllegalArgumentException("Lengte mag maximaal 100 characters zijn");
+        if (description.length() > 100 || description.isEmpty()) {
+            throw new IllegalArgumentException("Lengte mag maximaal 100 characters zijn en mag niet leeg zijn!");
         }
         this.description = description;
     }
 
-    public void setDuration(Time start, Time end) {
-        if (end.toLocalTime().isBefore(start.toLocalTime())) {
-            throw new IllegalArgumentException("End time must be before start!");
-        }
-        this.duration = end.getTime() - start.getTime();
+    public void setDuration(Time start, Time end) throws ParseException {
+        SimpleDateFormat simpleDateFormat
+                = new SimpleDateFormat("HH:mm:ss");
+        Date date1 = simpleDateFormat.parse(String.valueOf(start));
+        Date date2 = simpleDateFormat.parse(String.valueOf(end));
+        long differenceInMilliSeconds
+                = Math.abs(date2.getTime() - date1.getTime());
+        differenceInMilliSeconds = differenceInMilliSeconds / 60000;
+        this.duration = differenceInMilliSeconds;
     }
 
     public void setUserid(int userid) {
@@ -121,6 +133,7 @@ public class WorkOrder {
     }
 
     public void setDate(Timestamp date) {
+        if (date == null) throw new IllegalArgumentException("datum mag niet leeg zijn");
         this.date = date;
     }
 

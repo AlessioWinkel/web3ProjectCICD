@@ -8,6 +8,8 @@ import java.security.NoSuchAlgorithmException;
 public class workOrderOverview extends RequestHandler{
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, NoSuchAlgorithmException {
+        request.setAttribute("aantalWorkOrders",service.getAllWorkOrders().size());
+        request.setAttribute("workOrders",service.getAllWorkOrders());
         return "workOrderOverview.jsp";
     }
 }

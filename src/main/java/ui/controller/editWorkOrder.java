@@ -2,7 +2,6 @@ package ui.controller;
 
 import domain.exceptions.DbException;
 import domain.exceptions.DomainException;
-import domain.model.Project;
 import domain.model.User;
 import domain.model.WorkOrder;
 
@@ -20,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class addWorkOrder extends RequestHandler {
+public class editWorkOrder extends RequestHandler{
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, NoSuchAlgorithmException, ParseException {
         HttpSession session = request.getSession();
@@ -49,6 +48,7 @@ public class addWorkOrder extends RequestHandler {
         request.setAttribute("errors", errors);
         return "addWorkOrder.jsp";
     }
+
 
     private void setWorkOrderDescription(WorkOrder workOrder, HttpServletRequest request, ArrayList<String> errors) {
         String workOrderDescription = request.getParameter("description");

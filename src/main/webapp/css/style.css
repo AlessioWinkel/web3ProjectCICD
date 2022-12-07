@@ -7,8 +7,12 @@
 body {
 	font-family: arial,sans-serif;
 	font-size: 90%;
-	color: #303d11;
 	background-color: #303d11;
+}
+
+.workOrderContainer {
+	width: 12%;
+	border: 1px solid black;
 }
 
 div#container {
@@ -53,7 +57,6 @@ h2, main, footer {
 }
 
 h1 {
-	background-image: url("../images/bannerKlein.png");
 	height: 100px;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -143,9 +146,7 @@ input {
 	div#container {
 	max-width: 1000px;
 	}
-	h1 {
-	background-image: url("../images/banner.png");
-	}
+
 	
 	nav ul {
   	display: -webkit-box;  /* OLD - iOS 6-, Safari 3.1-6, BB7 */
