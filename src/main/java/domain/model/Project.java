@@ -20,7 +20,7 @@ public class Project {
         setEnd(end);
         setTeam(String.valueOf(team));
     }
-    public Project() {};
+    public Project() {}
 
     public String getTeamString() {return team.getStringValue();}
     public int getProjectid() {

@@ -1,6 +1,7 @@
 package domain.service;
 
 
+import domain.model.Course;
 import domain.model.Project;
 import domain.model.User;
 import domain.model.WorkOrder;
@@ -12,9 +13,11 @@ import java.util.Date;
 
 public class AppService {
 
-    private WorkOrderService workorders = new WorkOrderServiceDBSQL();
-    private UserService users = new UserServiceDBSQL();
-    private ProjectService projects = new ProjectServiceDBSQL();
+    private final WorkOrderService workorders = new WorkOrderServiceDBSQL();
+    private final UserService users = new UserServiceDBSQL();
+    private final ProjectService projects = new ProjectServiceDBSQL();
+    private final CourseService courses = new CourseServiceDBSQL();
+
 
     public void addWorkOrder(WorkOrder workOrder) {workorders.addWorkOrder(workOrder);}
 
@@ -64,4 +67,16 @@ public class AppService {
 
     public void editProject(int id, Timestamp start, Timestamp end) {projects.editProject(id,start,end);
     }
+    public void addLector(String lector){
+        courses.addLector(lector);
+     }
+     public void addCourse(Course course){
+         courses.addCourse(course);
+    }
+    public ArrayList<Course> getAllCourses() {
+        return courses.getAllCourses();
+    }
+    public void deleteCourses(String name){courses.deleteCourses(name);}
+
+
 }

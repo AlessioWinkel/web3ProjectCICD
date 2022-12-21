@@ -13,9 +13,9 @@ import javax.servlet.annotation.*;
 
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
-    private AppService service = new AppService();
+    private final AppService service = new AppService();
 
-    private HandlerFactory handlerFactory = new HandlerFactory();
+    private final HandlerFactory handlerFactory = new HandlerFactory();
 
     public Controller() {
         super();
