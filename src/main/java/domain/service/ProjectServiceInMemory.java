@@ -17,7 +17,7 @@ public class ProjectServiceInMemory implements ProjectService {
     private final ArrayList<Project> projectsArray = new ArrayList<>();
     private int projectid = 1;
 
-    public ProjectServiceInMemory() {};
+    public ProjectServiceInMemory() {}
 
     @Override
     public void addProject(Project project) {

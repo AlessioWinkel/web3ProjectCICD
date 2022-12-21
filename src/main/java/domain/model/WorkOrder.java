@@ -28,7 +28,7 @@ public class WorkOrder {
         setDuration(start,end);
         setDescription(description);
     }
-    public WorkOrder() {};
+    public WorkOrder() {}
 
     public WorkOrder(int workorderid, int userid,String username, Team team,Timestamp date, Time start, Time end, String description) throws ParseException {
 
