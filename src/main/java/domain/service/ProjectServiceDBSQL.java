@@ -4,6 +4,7 @@ import domain.exceptions.DbException;
 import domain.model.Project;
 import domain.model.Team;
 import domain.model.User;
+import domain.model.WorkOrder;
 import domain.util.DbConnectionService;
 
 import java.io.UnsupportedEncodingException;
@@ -67,11 +68,15 @@ public class ProjectServiceDBSQL implements ProjectService{
 
     @Override
     public Project findProjectWithId(int id) {
+        Project project = null;
+        if (id <=0)
+            throw new IllegalArgumentException("Foute id ingegeven");
         ArrayList<Project> projects = new ArrayList<>();
         Project project2 = null;
-        String sql = String.format("SELECT * from %s.project", schema);
+        String sql = String.format("SELECT * from %s.project where projectid=?", schema);
         try {
             PreparedStatement statement = getConnection().prepareStatement(sql);
+            statement.setInt(1,id);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 int id2 = result.getInt("projectid");
@@ -80,23 +85,18 @@ public class ProjectServiceDBSQL implements ProjectService{
                 Team team = Team.valueOf(teamString.toUpperCase());
                 Timestamp start =  result.getTimestamp("start");
                 if (result.getTimestamp("einde") == null) {
-                    projects.add(new Project(id,naam,team,start,null));
+                    project = new Project(id,naam,team,start,null);
                 } else {
                     Timestamp einde = result.getTimestamp("einde");
-                    projects.add(new Project(id2,naam,team,start,einde));
+                    project = new Project(id2,naam,team,start,einde);
                 }
             }
-        } catch (SQLException e) {
+        } catch (SQLException | IllegalArgumentException e) {
             throw new DbException(e.getMessage());
         }
-        if (id <=0)
-            throw new IllegalArgumentException("Foute id ingegeven");
-        for (Project project : projects) {
-            if (project.getProjectid() == id)
-                project2 = project;
-        }
 
-        return project2;
+
+        return project;
     }
 
     @Override

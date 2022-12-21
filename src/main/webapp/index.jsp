@@ -27,6 +27,47 @@
 					<form action="Controller?command=LogOut" method="POST">
 						<input type="submit" id="LogOut" value="Log Out">
 					</form>
+
+					<c:if test="${not empty errors}">
+						<div class="alert alert-danger">
+							<ul>
+								<c:forEach items="${errors}" var="error">
+									<li>${error}</li>
+								</c:forEach>
+							</ul>
+						</div>
+					</c:if>
+
+					<form method="POST" action="Controller?command=searchProjectById" novalidate>
+
+						<p class="form-group ${projectIdClass}">
+							<label class="control-label" for="projectIdInput">Project Id</label>
+							<input id="projectIdInput" name="projectId" type="text">
+						</p>
+
+
+						<p><input type="submit" id="searchProject" value="Search Project"></p>
+					</form>
+
+
+				<%-- user is logged in -- show welcome and logout form --%>
+
+					<c:choose>
+						<c:when test="${not empty project}">
+						<p>Jouw gezochte project:</p>
+						<tr>
+							<td>${project.projectid}</td>
+							<td>${project.name}</td>
+							<td>${project.team}</td>
+							<td>${project.start}</td>
+							<td>${project.end}</td>
+
+						</tr>
+						</c:when>
+						<c:otherwise>
+							<p>Er is nog geen project gezocht</p>
+						</c:otherwise>
+					</c:choose>
 				</c:when>
 				<c:otherwise>
 					<c:if test="${not empty fout}">
