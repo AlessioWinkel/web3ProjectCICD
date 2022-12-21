@@ -19,6 +19,8 @@ public class AppService {
     private final CourseService courses = new CourseServiceDBSQL();
 
     public WorkOrder findWorkOrderById(int id) {return workorders.findWorkOrderById(id);}
+
+    public  ArrayList<WorkOrder> sortWorkOrdersByDate() {return workorders.sortWorkOrdersByDate();}
     public void addWorkOrder(WorkOrder workOrder) {workorders.addWorkOrder(workOrder);}
 
     public void deleteWorkorder(int id) {workorders.deleteWorkorder(id);}

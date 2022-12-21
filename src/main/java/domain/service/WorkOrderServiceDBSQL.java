@@ -94,6 +94,33 @@ public class WorkOrderServiceDBSQL implements WorkOrderService{
         return workOrder;
     }
 
+    public ArrayList<WorkOrder> sortWorkOrdersByDate() {
+        ArrayList<WorkOrder> workorders = new ArrayList<>();
+        String sql = String.format("SELECT * from %s.workorder order by datum asc", schema);
+        try {
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                int workorderId = result.getInt("workorder_id");
+                int userId = result.getInt("userid");
+                String username = result.getString("username");
+                String teamString = result.getString("userteam");
+                Team team = Team.valueOf(teamString.toUpperCase());
+                Timestamp datum = result.getTimestamp("datum");
+                Time start = result.getTime("start_time");
+                Time einde = result.getTime("end_time");
+                String description = result.getString("description");
+                workorders.add(new WorkOrder(workorderId,userId,username,team,datum,start,einde,description));
+
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        return workorders;
+    }
+
     public void deleteWorkorder(int id) {
         String sql = String.format("DELETE from %s.workorder WHERE workorder_id=?", schema);
         try {

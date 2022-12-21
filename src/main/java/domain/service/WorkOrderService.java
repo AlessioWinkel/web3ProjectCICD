@@ -14,6 +14,8 @@ public interface WorkOrderService {
 
     WorkOrder findWorkOrderById(int id);
 
+    ArrayList<WorkOrder> sortWorkOrdersByDate();
+
     void deleteWorkorder(int id);
 
     void addWorkOrder(WorkOrder workOrder);
