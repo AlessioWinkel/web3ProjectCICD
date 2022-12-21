@@ -21,7 +21,7 @@
 			<c:choose>
 
 				<%-- user is logged in -- show welcome and logout form --%>
-				<c:when test="${sessionScope.user!=null}">
+				<c:when test="${not empty user}">
 
 					<p>Welcome, ${user.firstName }</p>
 					<form action="Controller?command=LogOut" method="POST">
@@ -29,6 +29,13 @@
 					</form>
 				</c:when>
 				<c:otherwise>
+					<c:if test="${not empty fout}">
+						<div class="alert alert-danger">
+							<ul>
+									<li>${fout}</li>
+							</ul>
+						</div>
+					</c:if>
 					<%-- no user is logged in -- show login form --%>
 					<p>Please log in.</p>
 					<form method="POST" action="Controller?command=LogIn" novalidate>

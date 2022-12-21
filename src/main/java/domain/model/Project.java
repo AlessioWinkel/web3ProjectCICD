@@ -71,7 +71,7 @@ public class Project {
 
     public void setStart(Timestamp start) {
         if (start == null) {
-            throw new IllegalArgumentException("Datum mag niet leeg zijn");
+            throw new IllegalArgumentException("Start datum mag niet leeg zijn");
         }
         this.start = start;
     }

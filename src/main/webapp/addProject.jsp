@@ -40,7 +40,7 @@
             <form method="POST" action="Controller?command=addProject" novalidate>
 
                 <p class="form-group ${projectNameClass}">
-                    <label class="control-label" for="projectNaam">Project name</label>
+                    <label class="control-label" for="projectNaam">Project name *</label>
                     <input id="projectNaam" name="projectNaam" type="text"
                            value="${projectNaamPreviousValue}" >
                 </p>
@@ -57,7 +57,7 @@
                 </p>
 
                 <p class="form-group ${startClass}">
-                    <label class="control-label" for="start">Start datum "yyyy-MM-dd" formaat</label>
+                    <label class="control-label" for="start">Start datum *</label>
                     <input id="start" name="start" type="date"
                            value="${startPreviousValue}">
                     <input id="startTime" name="startTime" type="time"
@@ -65,7 +65,7 @@
                 </p>
 
                 <p class="form-group ${eindeClass}">
-                    <label class="control-label" for="einde">Eind datum "yyyy-MM-dd" formaat</label>
+                    <label class="control-label" for="einde">Eind datum</label>
                     <input id="einde" name="einde" type="date"
                            value="${eindePreviousValue}" >
                     <input id="eindeTime" name="eindeTime" type="time"

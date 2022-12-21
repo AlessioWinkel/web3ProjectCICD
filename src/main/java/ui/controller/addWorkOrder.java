@@ -30,19 +30,19 @@ public class addWorkOrder extends RequestHandler {
         ArrayList<String> errors = new ArrayList<String>();
 
         WorkOrder workOrder = new WorkOrder();
-        setWorkOrderUserId(workOrder, user, request, errors);
-        setWorkOrderUserName(workOrder, user, request, errors);
-        setWorkOrderTeam(workOrder, user, request, errors);
         setWorkOrderDatum(workOrder, request, errors);
         setWorkOrderStart(workOrder, request, errors);
         setWorkOrderEinde(workOrder, request, errors);
+        setWorkOrderUserId(workOrder, user, request, errors);
+        setWorkOrderUserName(workOrder, user, request, errors);
+        setWorkOrderTeam(workOrder, user, request, errors);
         setWorkOrderDescription(workOrder, request, errors);
 
         if (errors.size() == 0) {
             try {
                 service.addWorkOrder(workOrder);
-                return "Controller?command=workOrderOverview";
-            } catch (DomainException | DbException exc) {
+                return "Controller?command=workOrderOverviewPage";
+            } catch (IllegalArgumentException | DbException exc) {
                 errors.add(exc.getMessage());
             }
         }
@@ -98,15 +98,19 @@ public class addWorkOrder extends RequestHandler {
     private void setWorkOrderDatum(WorkOrder workOrder, HttpServletRequest request, ArrayList<String> errors) {
         String dateFromHtml = request.getParameter("date");
         String dateTimeFromHtml = request.getParameter("dateTime");
-        String dateAndTime = (dateFromHtml + dateTimeFromHtml);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
-        Timestamp dateTimeStamp = Timestamp.valueOf(dateTime);
+        String dateAndTime = (dateFromHtml + " " + dateTimeFromHtml);
+        Timestamp dateTimeStamp;
+        if (dateAndTime.equals(dateFromHtml + " ") || dateAndTime.equals(" ") || dateAndTime.equals(" " +dateTimeFromHtml)) {
+            dateTimeStamp = null;
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
+            dateTimeStamp = Timestamp.valueOf(dateTime);
+        }
         try {
             workOrder.setDate(dateTimeStamp);
             request.setAttribute("dateClass", "has-success");
             request.setAttribute("datePreviousValue", dateFromHtml);
-            request.setAttribute("dateTimePreviousValue", dateTimeFromHtml);
         }
         catch (IllegalArgumentException exc) {
             errors.add(exc.getMessage());

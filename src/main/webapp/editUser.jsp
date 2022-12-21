@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Edit user</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 <main>

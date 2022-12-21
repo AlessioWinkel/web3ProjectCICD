@@ -39,14 +39,14 @@ public class editWorkOrder extends RequestHandler{
 
         if (errors.size() == 0) {
             try {
-                service.addWorkOrder(workOrder);
-                return "Controller?command=workOrderOverview";
+                service.editWorkOrder(workOrder.getWorkorderid(),workOrder.getDate(),workOrder.getStart(), workOrder.getEnd(),workOrder.getDescription());
+                return "Controller?command=workOrderOverviewPage";
             } catch (DomainException | DbException exc) {
                 errors.add(exc.getMessage());
             }
         }
         request.setAttribute("errors", errors);
-        return "addWorkOrder.jsp";
+        return "editWorkOrder.jsp";
     }
 
 

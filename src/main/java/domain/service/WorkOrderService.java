@@ -12,5 +12,7 @@ public interface WorkOrderService {
 
     void editWorkOrder(int id,Timestamp date, Time start, Time einde, String description);
 
+    void deleteWorkorder(int id);
+
     void addWorkOrder(WorkOrder workOrder);
 }

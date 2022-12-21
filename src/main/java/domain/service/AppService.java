@@ -18,6 +18,8 @@ public class AppService {
 
     public void addWorkOrder(WorkOrder workOrder) {workorders.addWorkOrder(workOrder);}
 
+    public void deleteWorkorder(int id) {workorders.deleteWorkorder(id);}
+
     public void editWorkOrder(int id, Timestamp date, Time start, Time einde, String description) {workorders.editWorkOrder(id, date,start,einde,description);}
 
     public ArrayList<WorkOrder> getAllWorkOrders() {return workorders.getAllWorkOrders();}

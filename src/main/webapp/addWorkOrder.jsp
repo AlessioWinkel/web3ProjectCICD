@@ -17,9 +17,13 @@
     <jsp:include page="nav.jspf"/>
 </header>
 
+
+
 <c:choose>
     <%-- user is logged in -- show welcome and logout form --%>
     <c:when test="${sessionScope.user!=null}">
+
+        <h2>Voeg work order toe</h2>
         <c:if test="${not empty errors}">
             <div class="alert alert-danger">
                 <ul>
@@ -29,8 +33,6 @@
                 </ul>
             </div>
         </c:if>
-        <h2>Voeg work order toe</h2>
-
 
         <form method="POST" action="Controller?command=addWorkOrder" novalidate>
 
@@ -63,6 +65,13 @@
         </form>
     </c:when>
     <c:otherwise>
+        <c:if test="${not empty fout}">
+            <div class="alert alert-danger">
+                <ul>
+                    <li>${fout}</li>
+                </ul>
+            </div>
+        </c:if>
         <%-- no user is logged in -- show login form --%>
         <p>Please log in.</p>
         <form method="POST" action="Controller?command=LogIn" novalidate>

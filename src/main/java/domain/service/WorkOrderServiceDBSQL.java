@@ -68,6 +68,17 @@ public class WorkOrderServiceDBSQL implements WorkOrderService{
         }
     }
 
+    public void deleteWorkorder(int id) {
+        String sql = String.format("DELETE from %s.workorder WHERE workorder_id=?", schema);
+        try {
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+    }
+
     @Override
     public void addWorkOrder(WorkOrder workOrder) {
         String query = String.format("insert into %s.workorder (userid,username,userteam,datum,start_time,end_time,description) values (?,?,?,?,?,?,?)", schema);

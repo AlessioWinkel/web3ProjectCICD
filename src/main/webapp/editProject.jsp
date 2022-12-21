@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Edit project</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 <main>
@@ -34,20 +35,23 @@
             <form method="POST" action="Controller?command=editProject&id=${param.id}" novalidate>
 
                 <p class="form-group ${projectNameClass}">
-                    <label class="control-label" for="projectName">Project Name:</label>
+                    <label class="control-label" for="projectName">Project Name *</label>
                     <a id="projectName" name="projectName">${param.name}</a>
                 </p>
                 <p class="form-group ${startClass}">
-                    <label class="control-label" for="startDate">Start date</label>
-                    <input id="startDate" name="startDate" type="date">
-                    <input id="startTime" name="startTime" type="time">
-
+                    <label class="control-label" for="start">Start datum *</label>
+                    <input id="start" name="start" type="date"
+                           value="${startPreviousValue}">
+                    <input id="startTime" name="startTime" type="time"
+                           value="${startTimePreviousValue}" >
                 </p>
 
                 <p class="form-group ${eindeClass}">
-                    <label class="control-label" for="endDate">End date</label>
-                    <input id="endDate" name="endDate" type="date">
-                    <input id="eindeTime" name="eindeTime" type="time">
+                    <label class="control-label" for="einde">Eind datum</label>
+                    <input id="einde" name="einde" type="date"
+                           value="${eindePreviousValue}" >
+                    <input id="eindeTime" name="eindeTime" type="time"
+                           value="${eindeTimePreviousValue}" >
                 </p>
 
                 <p><input type="submit" id="update" value="Update"></p>
