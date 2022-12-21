@@ -25,10 +25,13 @@ public class editWorkOrder extends RequestHandler{
         HttpSession session = request.getSession();
 
         User user = (User) session.getAttribute("user");
+        int id = Integer.parseInt(request.getParameter("workOrderId"));
+
+
 
         ArrayList<String> errors = new ArrayList<String>();
 
-        WorkOrder workOrder = new WorkOrder();
+        WorkOrder workOrder = service.findWorkOrderById(id);
         setWorkOrderUserId(workOrder, user, request, errors);
         setWorkOrderUserName(workOrder, user, request, errors);
         setWorkOrderTeam(workOrder, user, request, errors);

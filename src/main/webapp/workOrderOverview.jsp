@@ -39,7 +39,7 @@
                             <p>Time:${workOrder.start} to ${workOrder.end}</p>
                             <p>Duration: ${workOrder.duration} minutes</p>
                             <p>Description: ${workOrder.description}</p>
-                            <a href="Controller?command=editWorkOrderPage">Edit</a>
+                            <a href="Controller?command=editWorkOrderPage&workOrderId=${workOrder.workorderid}">Edit</a>
                             <a href="Controller?command=deleteWorkOrderConfirmatie&workOrderId=${workOrder.workorderid}">Remove</a>
                         </section>
 

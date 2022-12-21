@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: aless
@@ -20,7 +21,16 @@
 
 
 
-<form method="POST" action="Controller?command=editWorkOrder" novalidate>
+<form method="POST" action="Controller?command=editWorkOrder&workOrderId=${param.workOrderId}" novalidate>
+    <c:if test="${not empty errors}">
+        <div class="alert alert-danger">
+            <ul>
+                <c:forEach items="${errors}" var="error">
+                    <li>${error}</li>
+                </c:forEach>
+            </ul>
+        </div>
+    </c:if>
 
     <p class="form-group ${dateClass}">
         <label class="control-label" for="date">Date </label>

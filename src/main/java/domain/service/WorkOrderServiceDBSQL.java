@@ -1,18 +1,13 @@
 package domain.service;
 
 import domain.exceptions.DbException;
-import domain.model.Project;
 import domain.model.Team;
 import domain.model.WorkOrder;
 import domain.util.DbConnectionService;
-import domain.util.PasswordHashing;
 
 import java.sql.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class WorkOrderServiceDBSQL implements WorkOrderService{
 
@@ -54,7 +49,7 @@ public class WorkOrderServiceDBSQL implements WorkOrderService{
 
     @Override
     public void editWorkOrder(int id,Timestamp date, Time start, Time einde, String description) {
-        String sql = String.format("UPDATE %s.workorder SET date=?, start_time=?, end_time=?, description=? WHERE workorder_id=?", schema);
+        String sql = String.format("UPDATE %s.workorder SET datum=?, start_time=?, end_time=?, description=? WHERE workorder_id=?", schema);
         try {
             PreparedStatement statement = getConnection().prepareStatement(sql);
             statement.setTimestamp(1, date);
@@ -66,6 +61,37 @@ public class WorkOrderServiceDBSQL implements WorkOrderService{
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
         }
+    }
+
+    @Override
+    public WorkOrder findWorkOrderById(int id) {
+
+        WorkOrder workOrder = null;
+        String sql = String.format("SELECT * from %s.workorder where workorder_id=?", schema);
+
+        try {
+            PreparedStatement statement = getConnection().prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                int id2 = result.getInt("workorder_id");
+                int userid  = result.getInt("userid");
+                String username = result.getString("username");
+                String teamString = result.getString("userteam");
+                Team team = Team.valueOf(teamString.toUpperCase());
+                Timestamp datum =  result.getTimestamp("datum");
+                Time start = result.getTime("start_time");
+                Time einde = result.getTime("end_time");
+                String description = result.getString("description");
+                workOrder = new WorkOrder(id2,userid,username,team,datum,start,einde,description);
+            }
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        return workOrder;
     }
 
     public void deleteWorkorder(int id) {

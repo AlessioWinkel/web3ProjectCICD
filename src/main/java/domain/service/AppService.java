@@ -18,7 +18,7 @@ public class AppService {
     private final ProjectService projects = new ProjectServiceDBSQL();
     private final CourseService courses = new CourseServiceDBSQL();
 
-
+    public WorkOrder findWorkOrderById(int id) {return workorders.findWorkOrderById(id);}
     public void addWorkOrder(WorkOrder workOrder) {workorders.addWorkOrder(workOrder);}
 
     public void deleteWorkorder(int id) {workorders.deleteWorkorder(id);}

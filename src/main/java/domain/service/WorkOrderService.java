@@ -12,6 +12,8 @@ public interface WorkOrderService {
 
     void editWorkOrder(int id,Timestamp date, Time start, Time einde, String description);
 
+    WorkOrder findWorkOrderById(int id);
+
     void deleteWorkorder(int id);
 
     void addWorkOrder(WorkOrder workOrder);
