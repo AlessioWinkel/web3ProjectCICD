@@ -19,6 +19,10 @@ GRANT ALL ON TABLE groep301.project TO local_r0877579;
 INSERT INTO groep301.project ("projectid","naam","team","start","einde") values (1, 'alessiotest', 'alpha', '22/02/2022',NULL);
 
 
+-- grant aan teamgenoot
+GRANT ALL ON SCHEMA groep301 TO local_r0842359;
+GRANT ALL ON SEQUENCE groep301.project_id_seq TO local_r0842359;
+GRANT ALL ON TABLE groep301.project TO local_r0842359;
 
 -- grant aan lectoren
 GRANT ALL ON SCHEMA groep301 TO local_u0015529;
@@ -28,10 +32,5 @@ GRANT ALL ON TABLE groep301.project TO local_u0015529;
 GRANT ALL ON SCHEMA groep301 TO local_u0034562;
 GRANT ALL ON SEQUENCE groep301.project_id_seq TO local_u0034562;
 GRANT ALL ON TABLE groep301.project TO local_u0034562;
-
--- grant aan teamgenoot
-GRANT ALL ON SCHEMA groep3O1 TO local_r0842359;
-GRANT ALL ON SEQUENCE groep301.project_id_seq TO local_r0842359;
-GRANT ALL ON TABLE groep301.project TO local_0842359;
 
 
