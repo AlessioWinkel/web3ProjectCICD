@@ -24,6 +24,7 @@
     </header>
     <main>
         <c:if test="${sessionScope.user == null}">
+            <p>U heeft geen rechten om deze site te bezoeken</p>
             <p>Please log in.</p>
             <form method="POST" action="Controller?command=LogIn" novalidate>
 

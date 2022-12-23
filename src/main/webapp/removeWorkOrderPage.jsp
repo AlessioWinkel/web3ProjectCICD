@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: aless
@@ -11,9 +12,29 @@
     <title>Title</title>
 </head>
 <body>
+<c:if test="${sessionScope.user == null}">
+    <p>U heeft geen rechten om deze site te bezoeken</p>
+    <p>Please log in.</p>
+    <form method="POST" action="Controller?command=LogIn" novalidate>
+
+        <p class="form-group">
+            <label class="control-label" for="email">Email</label>
+            <input id="email" name="email" type="text">
+        </p>
+        <p class="form-group">
+            <label class="control-label" for="password">Password</label>
+            <input id="password" name="password" type="password">
+        </p>
+
+        <p><input type="submit" id="logIn" value="Log In"></p>
+
+    </form>
+</c:if>
+<c:if test="${sessionScope.user != null}">
+
 <p>Bent u zeker dat u deze workorder wilt verwijderen?</p>
 <a href="Controller?command=deleteWorkOrder&workOrderId=${param.workOrderId}">Ja</a>
 <a href="Controller?command=workOrderOverviewPage">Nee</a>
-
+</c:if>
 </body>
 </html>

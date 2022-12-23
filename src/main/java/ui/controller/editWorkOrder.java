@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 public class editWorkOrder extends RequestHandler{
     @Override
@@ -70,8 +71,14 @@ public class editWorkOrder extends RequestHandler{
     private void setWorkOrderEinde(WorkOrder workOrder, HttpServletRequest request, ArrayList<String> errors) throws ParseException {
         String einde = request.getParameter("endTime");
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-        Date d1 = format.parse(einde);
-        Time ppstime = new Time(d1.getTime());
+        Time ppstime;
+
+        if (Objects.equals(einde, "")) {
+            ppstime = null;
+        } else {
+            Date d1 = format.parse(einde);
+            ppstime = new Time(d1.getTime());
+        }
         try {
             workOrder.setEnd(ppstime);
             request.setAttribute("endTimeClass", "has-success");
@@ -86,8 +93,16 @@ public class editWorkOrder extends RequestHandler{
     private void setWorkOrderStart(WorkOrder workOrder, HttpServletRequest request, ArrayList<String> errors) throws ParseException {
         String start = request.getParameter("startTime");
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-        Date d1 = format.parse(start);
-        Time ppstime = new Time(d1.getTime());
+        Time ppstime;
+
+        if (Objects.equals(start, "")) {
+            ppstime = null;
+        } else {
+            Date d1 = format.parse(start);
+            ppstime = new Time(d1.getTime());
+        }
+
+
         try {
             workOrder.setStart(ppstime);
             request.setAttribute("startTimeClass", "has-success");
@@ -102,21 +117,28 @@ public class editWorkOrder extends RequestHandler{
     private void setWorkOrderDatum(WorkOrder workOrder, HttpServletRequest request, ArrayList<String> errors) {
         String dateFromHtml = request.getParameter("date");
         String dateTimeFromHtml = request.getParameter("dateTime");
-        String dateAndTime = (dateFromHtml + dateTimeFromHtml);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddHH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
-        Timestamp dateTimeStamp = Timestamp.valueOf(dateTime);
+        String dateAndTime = (dateFromHtml + " " + dateTimeFromHtml);
+        Timestamp dateTimeStamp;
+        if (dateAndTime.equals(" ") || dateAndTime.equals(dateFromHtml + " ") || dateAndTime.equals(" " + dateTimeFromHtml)) {
+            dateTimeStamp = null;
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(dateAndTime, formatter);
+            dateTimeStamp = Timestamp.valueOf(dateTime);
+        }
         try {
             workOrder.setDate(dateTimeStamp);
             request.setAttribute("dateClass", "has-success");
             request.setAttribute("datePreviousValue", dateFromHtml);
             request.setAttribute("dateTimePreviousValue", dateTimeFromHtml);
+
         }
         catch (IllegalArgumentException exc) {
             errors.add(exc.getMessage());
             request.setAttribute("dateClass", "has-error");
         }
     }
+
 
     private void setWorkOrderTeam(WorkOrder workOrder, User user, HttpServletRequest request, ArrayList<String> errors) {
         String team = user.getTeamString();

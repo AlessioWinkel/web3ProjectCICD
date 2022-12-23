@@ -116,7 +116,7 @@ public class addWorkOrder extends RequestHandler {
         String dateTimeFromHtml = request.getParameter("dateTime");
         String dateAndTime = (dateFromHtml + " " + dateTimeFromHtml);
         Timestamp dateTimeStamp;
-        if (dateAndTime.equals(" ")) {
+        if (dateAndTime.equals(" ") || dateAndTime.equals(dateFromHtml + " ") || dateAndTime.equals(" " + dateTimeFromHtml)) {
             dateTimeStamp = null;
         } else {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

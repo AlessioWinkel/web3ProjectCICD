@@ -121,6 +121,8 @@
     </c:when>
     <c:otherwise>
         <%-- no user is logged in -- show login form --%>
+    <p>U heeft geen rechten om deze site te bezoeken</p>
+
     <p>Please log in.</p>
     <form method="POST" action="Controller?command=LogIn" novalidate>
 

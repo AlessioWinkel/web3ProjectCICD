@@ -50,7 +50,7 @@ public class editProject extends RequestHandler{
         String dateTimeFromHtml = request.getParameter("startTime");
         String dateAndTime = (dateFromHtml + " " + dateTimeFromHtml);
         Timestamp dateTimeStamp;
-        if (dateAndTime.equals(dateFromHtml+ " ") || dateAndTime.equals(" ")) {
+        if (dateAndTime.equals(" ") || (dateAndTime.equals(" " + dateTimeFromHtml)) || dateAndTime.equals(dateFromHtml + " ")) {
             dateTimeStamp = null;
         } else {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

@@ -19,6 +19,8 @@
     </header>
 
     <c:if test="${sessionScope.user == null}">
+        <p>U heeft geen rechten om deze site te bezoeken</p>
+
         <p>Please log in.</p>
         <form method="POST" action="Controller?command=LogIn" novalidate>
 
@@ -90,7 +92,7 @@
                         <c:if test="${sessionScope.user.userid == param.id && sessionScope.user.role == 'EMPLOYEE'}">
                             <option value="Employee">Employee</option>
                         </c:if>
-                        <c:if test="${sessionScope.user.role == 'DIRECTOR'}">
+                        <c:if test="${sessionScope.user.role == 'DIRECTOR' && sessionScope.user.userid != param.id}">
                             <option value="Director">Director</option>
                             <option value="Teamleader">Teamleader</option>
                             <option value="Employee">Employee</option>
