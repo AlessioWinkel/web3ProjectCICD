@@ -9,7 +9,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Remove Work Order</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 <c:if test="${sessionScope.user == null}">

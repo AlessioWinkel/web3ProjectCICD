@@ -12,7 +12,7 @@
 <body>
 <div id="container">
 <header>
-<h1><span>XXX</span></h1>
+<h1><span>Register User</span></h1>
     <jsp:include page="nav.jsp"/>
 <h2>
 Register

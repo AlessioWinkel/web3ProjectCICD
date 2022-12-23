@@ -13,6 +13,8 @@ public class UserOverviewPage extends Page {
     @FindBy(id="pasAanKnop")
     private WebElement pasAanButton;
 
+    @FindBy(className="verwijderKnop")
+    private WebElement verwijderKnop;
     public UserOverviewPage(WebDriver driver) {
         super(driver);
         this.driver.get(getPath()+"Groep3_1_war_exploded/Controller?command=userOverview");

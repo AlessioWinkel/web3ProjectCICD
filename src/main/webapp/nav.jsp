@@ -14,7 +14,7 @@
                 <li class="navigatie-link"><a href="Controller?command=addProjectPage">Add project</a></li>
             </c:if>
             <c:if test="${sessionScope.user!=null}">
-                <li class="navigatie-link"><a href="Controller?command=workOrderOverviewPage">Work order</a></li>
+                <li class="navigatie-link" id="workOrderPageButton"><a href="Controller?command=workOrderOverviewPage">Work order</a></li>
             </c:if>
             <c:if test="${sessionScope.user!=null}">
                 <li class="navigatie-link"><a href="Controller?command=addWorkOrderPage">Add work order</a></li>

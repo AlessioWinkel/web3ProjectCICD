@@ -17,7 +17,7 @@
 </head>
 <body>
 <header>
-    <h1><span>XXX</span></h1>
+    <h1><span>Work Order overview</span></h1>
 
     <jsp:include page="nav.jsp"/>
     <h2>
@@ -107,7 +107,7 @@
     </c:forEach>
 
     <form method="POST" action="Controller?command=sortWorkOrdersByDate" novalidate>
-        <p><input type="submit" id="searchProject" value="Sort Work Orders By Date"></p>
+        <p><input type="submit" id="sortWorkOrders" value="Sort Work Orders By Date"></p>
     </form>
     </c:otherwise>
     </c:choose>

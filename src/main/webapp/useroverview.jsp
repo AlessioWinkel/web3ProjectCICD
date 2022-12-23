@@ -76,7 +76,7 @@ User Overview
 
                     <c:if test="${sessionScope.user != null && sessionScope.user.role == 'TEAMLEADER' && user.team == sessionScope.user.team}">
                         <td>
-                            <a href="Controller?command=editPage&id=${user.userid}&lastName=${user.lastName}&firstName=${user.firstName}&email=${user.email}" id="pasAanKnop2">
+                            <a href="Controller?command=editPage&id=${user.userid}&lastName=${user.lastName}&firstName=${user.firstName}&email=${user.email}" id="pasAanKnop2" class="verwijderKnop">
                                 Pas aan
                             </a>
                         </td>

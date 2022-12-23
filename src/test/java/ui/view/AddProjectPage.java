@@ -44,6 +44,7 @@ public class AddProjectPage extends Page{
         submitButton.click();
     }
 
+
     public boolean hasErrorMessage (String message) {
         WebElement errorMsg = driver.findElement(By.cssSelector("div.alert-danger ul li"));
         return (message.equals(errorMsg.getText()));
