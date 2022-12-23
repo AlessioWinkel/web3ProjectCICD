@@ -23,8 +23,29 @@ public class DeleteUserTest {
     }
 
     @Test
-    public void given_allFieldsFilledInCorrectly_when_ProjectAdd_then_ProjectIsAdded() {
+    public void delete_works() {
+        SearchProjectPage searchProjectPage = PageFactory.initElements(driver, SearchProjectPage.class);
+        searchProjectPage.setEmailInput("director@ucll.be");
+        searchProjectPage.setPasswordInput("t");
+        searchProjectPage.logIn();
+        DeleteUserPage deleteUserPage = PageFactory.initElements(driver, DeleteUserPage.class);
+
+
+        deleteUserPage.delete();
         UserOverviewPage userOverviewPage = PageFactory.initElements(driver, UserOverviewPage.class);
+        assertTrue(userOverviewPage.doesNotContainUserWithName("testuser"));
 
     }
+
+    @Test
+    public void not_authorized_login_failed() {
+        SearchProjectPage searchProjectPage = PageFactory.initElements(driver, SearchProjectPage.class);
+        searchProjectPage.setEmailInput("directorééé@ucll.be");
+        searchProjectPage.setPasswordInput("t");
+        searchProjectPage.logIn();
+
+
+        assertTrue(searchProjectPage.containsError("No valid email/password"));
+    }
 }
+

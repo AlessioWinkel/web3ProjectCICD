@@ -45,4 +45,15 @@ public class UserOverviewPage extends Page {
         }
         return found;
     }
+
+    public boolean doesNotContainUserWithName(String name) {
+        ArrayList<WebElement> listItems=(ArrayList<WebElement>) this.driver.findElements(By.cssSelector("td"));
+        boolean notfound=false;
+        for (WebElement listItem:listItems) {
+            if (!listItem.getText().contains(name)) {
+                notfound=true;
+            }
+        }
+        return notfound;
+    }
 }

@@ -38,7 +38,7 @@
 </c:if>
 <c:if test="${sessionScope.user != null}">
     <article class="random-tekst">
-        <p>Bent u zeker dat u de afspraak wilt verwijderen?</p>
+        <p>Bent u zeker dat u de user wilt verwijderen?</p>
         <a href="Controller?command=verwijder&id=${param.id}" id="verwijderConfirmatie">
             Ja
         </a>

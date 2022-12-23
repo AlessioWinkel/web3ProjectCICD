@@ -28,11 +28,11 @@ public class SortWorkOrdersTest {
         workOrderOverviewPage.setPasswordInput("t");
         workOrderOverviewPage.logIn();
 
-        workOrderOverviewPage.goToWorkOrderPage();
-        workOrderOverviewPage.sort();
+        WorkOrderOverviewPage workOrderOverviewPage2 = PageFactory.initElements(driver, WorkOrderOverviewPage.class);
+        workOrderOverviewPage2.sort();
 
 
-        assertTrue(workOrderOverviewPage.containsWorkOrderWithName("Test"));
+        assertTrue(workOrderOverviewPage2.containsWorkOrderWithName("Test"));
     }
 
     @Test
