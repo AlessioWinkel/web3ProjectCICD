@@ -18,7 +18,7 @@
         <h1><span>Add a project</span></h1>
         <jsp:include page="nav.jsp"/>
         <h2>
-            Register
+            Add a project
         </h2>
 
     </header>
@@ -55,7 +55,7 @@
                     </ul>
                 </div>
                 </c:if>
-                <h2>Registreer je</h2>
+                <h2>Add a project</h2>
 
                 <form method="POST" action="Controller?command=addProject" novalidate>
 
