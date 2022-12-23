@@ -16,7 +16,7 @@
     <header>
         <h1><span>XXX</span></h1>
 
-        <jsp:include page="nav.jspf"/>
+        <jsp:include page="nav.jsp"/>
         <h2>
             Course Overview
         </h2>

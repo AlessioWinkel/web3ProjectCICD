@@ -30,6 +30,7 @@ public class addProject extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 service.addProject(project);
+                response.sendRedirect("Controller?command=projectOverview");
                 return "Controller?command=projectOverview";
             } catch (DomainException | DbException exc) {
                 errors.add(exc.getMessage());

@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%--
   Created by IntelliJ IDEA.
   User: aless
@@ -17,7 +19,7 @@
 <header>
     <h1><span>XXX</span></h1>
 
-    <jsp:include page="nav.jspf"/>
+    <jsp:include page="nav.jsp"/>
     <h2>
         Work Order Overview
     </h2>
@@ -31,15 +33,36 @@
     <c:when test="${activated == true}">
     <c:forEach var="workOrder" items="${sortedWorkOrders}">
     <section class="workOrderContainer">
+        <c:if test="${sessionScope.user.team == workOrder.team && sessionScope.user.role == 'EMPLOYEE'}">
+            <p>Order: ${fn:escapeXml(workOrder.workorderid)}</p>
+            <p>Employee: ${fn:escapeXml(workOrder.username)}</p>
+            <p>Date: ${fn:escapeXml(workOrder.date)}</p>
+            <p>Time:${fn:escapeXml(workOrder.start)} to ${fn:escapeXml(workOrder.end)}</p>
+            <p>Duration: ${fn:escapeXml(workOrder.duration)} minutes</p>
+            <p>Description: ${fn:escapeXml(workOrder.description)}</p>
+            <a href="Controller?command=editWorkOrderPage&workOrderId=${fn:escapeXml(workOrder.workorderid)}">Edit</a>
+        </c:if>
 
-        <p>Order: ${workOrder.workorderid}</p>
-        <p>Employee: ${workOrder.username}</p>
-        <p>Date: ${workOrder.date}</p>
-        <p>Time:${workOrder.start} to ${workOrder.end}</p>
-        <p>Duration: ${workOrder.duration} minutes</p>
-        <p>Description: ${workOrder.description}</p>
-        <a href="Controller?command=editWorkOrderPage&workOrderId=${workOrder.workorderid}">Edit</a>
-        <a href="Controller?command=deleteWorkOrderConfirmatie&workOrderId=${workOrder.workorderid}">Remove</a>
+        <c:if test="${sessionScope.user.role == 'TEAMLEADER' && sessionScope.user.team == workOrder.team}">
+            <p>Order: ${fn:escapeXml(workOrder.workorderid)}</p>
+            <p>Employee: ${fn:escapeXml(workOrder.username)}</p>
+            <p>Date: ${fn:escapeXml(workOrder.date)}</p>
+            <p>Time:${fn:escapeXml(workOrder.start)} to ${fn:escapeXml(workOrder.end)}</p>
+            <p>Duration: ${fn:escapeXml(workOrder.duration)} minutes</p>
+            <p>Description: ${fn:escapeXml(workOrder.description)}</p>
+            <a href="Controller?command=editWorkOrderPage&workOrderId=${fn:escapeXml(workOrder.workorderid)}">Edit</a>
+        </c:if>
+
+        <c:if test="${sessionScope.user.role == 'DIRECTOR'}">
+            <p>Order: ${fn:escapeXml(workOrder.workorderid)}</p>
+            <p>Employee: ${fn:escapeXml(workOrder.username)}</p>
+            <p>Date: ${fn:escapeXml(workOrder.date)}</p>
+            <p>Time:${fn:escapeXml(workOrder.start)} to ${fn:escapeXml(workOrder.end)}</p>
+            <p>Duration: ${fn:escapeXml(workOrder.duration)} minutes</p>
+            <p>Description: ${fn:escapeXml(workOrder.description)}</p>
+            <a href="Controller?command=editWorkOrderPage&workOrderId=${fn:escapeXml(workOrder.workorderid)}">Edit</a>
+            <a href="Controller?command=deleteWorkOrderConfirmatie&workOrderId=${fn:escapeXml(workOrder.workorderid)}">Remove</a>
+        </c:if>
     </section>
 
     </c:forEach>
@@ -49,14 +72,36 @@
     <c:forEach var="workOrder" items="${workOrders}">
     <section class="workOrderContainer">
 
-        <p>Order: ${workOrder.workorderid}</p>
-        <p>Employee: ${workOrder.username}</p>
-        <p>Date: ${workOrder.date}</p>
-        <p>Time:${workOrder.start} to ${workOrder.end}</p>
-        <p>Duration: ${workOrder.duration} minutes</p>
-        <p>Description: ${workOrder.description}</p>
-        <a href="Controller?command=editWorkOrderPage&workOrderId=${workOrder.workorderid}">Edit</a>
-        <a href="Controller?command=deleteWorkOrderConfirmatie&workOrderId=${workOrder.workorderid}">Remove</a>
+        <c:if test="${sessionScope.user.team == workOrder.team && sessionScope.user.role == 'EMPLOYEE'}">
+            <p>Order: ${fn:escapeXml(workOrder.workorderid)}</p>
+            <p>Employee: ${fn:escapeXml(workOrder.username)}</p>
+            <p>Date: ${fn:escapeXml(workOrder.date)}</p>
+            <p>Time:${fn:escapeXml(workOrder.start)} to ${fn:escapeXml(workOrder.end)}</p>
+            <p>Duration: ${fn:escapeXml(workOrder.duration)} minutes</p>
+            <p>Description: ${fn:escapeXml(workOrder.description)}</p>
+            <a href="Controller?command=editWorkOrderPage&workOrderId=${fn:escapeXml(workOrder.workorderid)}">Edit</a>
+        </c:if>
+
+        <c:if test="${sessionScope.user.role == 'TEAMLEADER' && sessionScope.user.team == workOrder.team}">
+            <p>Order: ${fn:escapeXml(workOrder.workorderid)}</p>
+            <p>Employee: ${fn:escapeXml(workOrder.username)}</p>
+            <p>Date: ${fn:escapeXml(workOrder.date)}</p>
+            <p>Time:${fn:escapeXml(workOrder.start)} to ${fn:escapeXml(workOrder.end)}</p>
+            <p>Duration: ${fn:escapeXml(workOrder.duration)} minutes</p>
+            <p>Description: ${fn:escapeXml(workOrder.description)}</p>
+            <a href="Controller?command=editWorkOrderPage&workOrderId=${fn:escapeXml(workOrder.workorderid)}">Edit</a>
+        </c:if>
+
+        <c:if test="${sessionScope.user.role == 'DIRECTOR'}">
+            <p>Order: ${fn:escapeXml(workOrder.workorderid)}</p>
+            <p>Employee: ${fn:escapeXml(workOrder.username)}</p>
+            <p>Date: ${fn:escapeXml(workOrder.date)}</p>
+            <p>Time:${fn:escapeXml(workOrder.start)} to ${fn:escapeXml(workOrder.end)}</p>
+            <p>Duration: ${fn:escapeXml(workOrder.duration)} minutes</p>
+            <p>Description: ${fn:escapeXml(workOrder.description)}</p>
+            <a href="Controller?command=editWorkOrderPage&workOrderId=${fn:escapeXml(workOrder.workorderid)}">Edit</a>
+            <a href="Controller?command=deleteWorkOrderConfirmatie&workOrderId=${fn:escapeXml(workOrder.workorderid)}">Remove</a>
+        </c:if>
     </section>
 
     </c:forEach>
@@ -81,11 +126,11 @@
 
         <p class="form-group">
             <label class="control-label" for="email">Email</label>
-            <input id="email" name="email" type="text">
+            <input id="email" name="email" type="text" value="${fn:escapeXml(param.email)}">
         </p>
         <p class="form-group">
             <label class="control-label" for="password">Password</label>
-            <input id="password" name="password" type="password">
+            <input id="password" name="password" type="password" value="${fn:escapeXml(param.password)}">
         </p>
 
         <p><input type="submit" id="logIn" value="Log In"></p>

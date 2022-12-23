@@ -13,13 +13,31 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <header>
-    <jsp:include page="nav.jspf"/>
+    <jsp:include page="nav.jsp"/>
 </header>
 <body>
 
 <h2>Edit work order </h2>
 
+<c:if test="${sessionScope.user == null}">
+    <p>Please log in.</p>
+    <form method="POST" action="Controller?command=LogIn" novalidate>
 
+        <p class="form-group">
+            <label class="control-label" for="email">Email</label>
+            <input id="email" name="email" type="text">
+        </p>
+        <p class="form-group">
+            <label class="control-label" for="password">Password</label>
+            <input id="password" name="password" type="password">
+        </p>
+
+        <p><input type="submit" id="logIn" value="Log In"></p>
+
+    </form>
+</c:if>
+
+<c:if test="${sessionScope.user!=null}">
 
 <form method="POST" action="Controller?command=editWorkOrder&workOrderId=${param.workOrderId}" novalidate>
     <c:if test="${not empty errors}">
@@ -59,5 +77,6 @@
 
     <p><input type="submit" id="editWorkOrder" value="Update Work Order"></p>
 </form>
+</c:if>
 </body>
 </html>

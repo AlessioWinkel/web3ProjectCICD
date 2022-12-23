@@ -9,8 +9,8 @@ import java.text.ParseException;
 public class deleteWorkOrder extends RequestHandler{
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, NoSuchAlgorithmException, ParseException {
-        int id = Integer.parseInt(request.getParameter("workOrderId"));
-        service.deleteWorkorder(id);
-        return "Controller?command=workOrderOverviewPage";
+            int id = Integer.parseInt(request.getParameter("workOrderId"));
+            service.deleteWorkorder(id);
+            return "Controller?command=workOrderOverviewPage";
     }
 }

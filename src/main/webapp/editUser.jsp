@@ -15,10 +15,30 @@
 <body>
 <main>
     <header>
-        <jsp:include page="nav.jspf"/>
+        <jsp:include page="nav.jsp"/>
     </header>
 
-    <div id="container2">
+    <c:if test="${sessionScope.user == null}">
+        <p>Please log in.</p>
+        <form method="POST" action="Controller?command=LogIn" novalidate>
+
+            <p class="form-group">
+                <label class="control-label" for="email">Email</label>
+                <input id="email" name="email" type="text">
+            </p>
+            <p class="form-group">
+                <label class="control-label" for="password">Password</label>
+                <input id="password" name="password" type="password">
+            </p>
+
+            <p><input type="submit" id="logIn" value="Log In"></p>
+
+        </form>
+    </c:if>
+<c:if test="${sessionScope.user!=null}">
+
+
+<div id="container2">
         <main>
             <h1>Edit user</h1>
             <h2>User id: <a id="userIdElement">${param.id}</a></h2>
@@ -38,12 +58,12 @@
                 <p class="form-group ${firstNameClass}">
                     <label class="control-label" for="firstNameInput">First name</label>
                     <input id="firstNameInput" name="firstNameInput" type="text"
-                           value="${param.firstName}" >
+                           value="${param.firstName}">
                 </p>
                 <p class="form-group ${lastNameClass}">
                     <label class="control-label" for="lastNameInput">Last name</label>
                     <input id="lastNameInput" name="lastNameInput" type="text"
-                           value="${param.lastName}" >
+                           value="${param.lastName}">
                 </p>
 
                 <p class="form-group ${emailClass}">
@@ -56,26 +76,61 @@
                     <label for="roleInput">Role</label>
 
                     <select name="roleInput" id="roleInput">
-                        <option value="Employee">Employee</option>
-                        <option value="Director">Director</option>
-                        <option value="Teamleader">Teamleader</option>
+                        <c:if test="${sessionScope.user.userid == param.id && sessionScope.user.role == 'TEAMLEADER'}">
+                            <option value="Teamleader">Teamleader</option>
+
+                        </c:if>
+
+                        <c:if test="${sessionScope.user.userid != param.id && sessionScope.user.role == 'TEAMLEADER'}">
+                            <option value="Teamleader">Teamleader</option>
+                            <option value="Employee">Employee</option>
+                        </c:if>
+
+
+                        <c:if test="${sessionScope.user.userid == param.id && sessionScope.user.role == 'EMPLOYEE'}">
+                            <option value="Employee">Employee</option>
+                        </c:if>
+                        <c:if test="${sessionScope.user.role == 'DIRECTOR'}">
+                            <option value="Director">Director</option>
+                            <option value="Teamleader">Teamleader</option>
+                            <option value="Employee">Employee</option>
+                        </c:if>
+
+                        <c:if test="${sessionScope.user.role == 'DIRECTOR' && sessionScope.user.userid == param.id}">
+                            <option value="Director">Director</option>
+                        </c:if>
                     </select>
                 </p>
                 <p>
                     <label for="teamInput">Team</label>
 
-                    <select name="teamInput" id="teamInput">
-                        <option value="Alpha">Alpha</option>
-                        <option value="Beta">Beta</option>
-                        <option value="Gamma">Gamma</option>
-                        <option value="Delta">Delta</option>
-                        <option value="Epsilon">Epsilon</option>
-                    </select>
+                    <c:if test="${sessionScope.user.role != 'DIRECTOR'}">
+                        <select name="teamInput" id="teamInput">
+                            <option value="${sessionScope.user.team}">${sessionScope.user.team}</option>
+                        </select>
+                    </c:if>
+
+                    <c:if test="${sessionScope.user.role == 'DIRECTOR' && sessionScope.user.userid != param.id}">
+                        <select name="teamInput" id="teamInput">
+                            <option value="Alpha">Alpha</option>
+                            <option value="Beta">Beta</option>
+                            <option value="Gamma">Gamma</option>
+                            <option value="Delta">Delta</option>
+                            <option value="Epsilon">Epsilon</option>
+                        </select>
+                    </c:if>
+
+                    <c:if test="${sessionScope.user.role == 'DIRECTOR' && sessionScope.user.userid == param.id}">
+                        <select name="teamInput" id="teamInput">
+                            <option value="Alpha">Alpha</option>
+                        </select>
+                    </c:if>
+
                 </p>
                 <p><input type="submit" id="update" value="Update"></p>
             </form>
     </div>
 </main>
-
+</c:if>
 </body>
 </html>

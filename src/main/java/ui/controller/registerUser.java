@@ -8,6 +8,7 @@ import ui.controller.RequestHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -27,9 +28,12 @@ public class registerUser extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 service.addUser(user);
+                response.sendRedirect("Controller?command=userOverview");
                 return "Controller?command=userOverview";
             } catch (DomainException | DbException exc) {
                 errors.add(exc.getMessage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
         request.setAttribute("errors", errors);

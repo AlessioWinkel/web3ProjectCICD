@@ -15,8 +15,26 @@
 <body>
 <main>
     <header>
-        <jsp:include page="nav.jspf"/>
+        <jsp:include page="nav.jsp"/>
     </header>
+    <c:if test="${sessionScope.user == null}">
+        <p>Please log in.</p>
+        <form method="POST" action="Controller?command=LogIn" novalidate>
+
+            <p class="form-group">
+                <label class="control-label" for="email">Email</label>
+                <input id="email" name="email" type="text">
+            </p>
+            <p class="form-group">
+                <label class="control-label" for="password">Password</label>
+                <input id="password" name="password" type="password">
+            </p>
+
+            <p><input type="submit" id="logIn" value="Log In"></p>
+
+        </form>
+    </c:if>
+<c:if test="${sessionScope.user!=null}">
 
     <div id="container2">
         <main>
@@ -58,6 +76,7 @@
 
             </form>
     </div>
+</c:if>
 </main>
 </body>
 </html>

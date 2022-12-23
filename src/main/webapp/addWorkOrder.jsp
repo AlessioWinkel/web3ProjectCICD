@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--
   Created by IntelliJ IDEA.
   User: aless
@@ -14,7 +15,7 @@
 </head>
 <body>
 <header>
-    <jsp:include page="nav.jspf"/>
+    <jsp:include page="nav.jsp"/>
 </header>
 
 
@@ -39,26 +40,26 @@
             <p class="form-group ${dateClass}">
                 <label class="control-label" for="date">Date *</label>
                 <input id="date" name="date" type="date"
-                       value="${datePreviousValue}" >
+                       value="${fn:escapeXml(datePreviousValue)}" >
                 <input id="dateTime" name="dateTime" type="time"
-                       value="${dateTimePreviousValue}" >
+                       value="${fn:escapeXml(dateTimePreviousValue)}" >
             </p>
             <p class="form-group ${startTimeClass}">
                 <label class="control-label" for="startTime">Start Time *</label>
                 <input id="startTime" name="startTime" type="time"
-                       value="${startTimePreviousValue}" >
+                       value="${fn:escapeXml(startTimePreviousValue)}" >
             </p>
 
             <p class="form-group ${endTimeClass}">
                 <label class="control-label" for="endTime">End Time *</label>
                 <input id="endTime" name="endTime" type="time"
-                       value="${endTimePreviousValue}">
+                       value="${fn:escapeXml(endTimePreviousValue)}" >
             </p>
 
             <p class="form-group ${descriptionClass}">
                 <label class="control-label" for="description">Description *</label>
                 <textarea id="description" name="description" rows="4" cols="50"
-                          value="${descriptionPreviousValue}"></textarea>
+                          value="${fn:escapeXml(descriptionPreviousValue)}"></textarea>
             </p>
 
             <p><input type="submit" id="addWorkOrder" value="Add Work Order"></p>
@@ -78,11 +79,11 @@
 
             <p class="form-group">
                 <label class="control-label" for="email">Email</label>
-                <input id="email" name="email" type="text">
+                <input id="email" name="email" type="text" value="${fn:escapeXml(param.email)}">
             </p>
             <p class="form-group">
                 <label class="control-label" for="password">Password</label>
-                <input id="password" name="password" type="password">
+                <input id="password" name="password" type="password" value="${fn:escapeXml(param.password)}">
             </p>
 
             <p><input type="submit" id="logIn" value="Log In"></p>

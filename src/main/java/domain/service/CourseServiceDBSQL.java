@@ -11,7 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CourseServiceDBSQL implements CourseService{
+public class    CourseServiceDBSQL implements CourseService{
     private final Connection connection;
     private final String schema;
 

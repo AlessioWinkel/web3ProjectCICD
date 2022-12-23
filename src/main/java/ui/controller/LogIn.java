@@ -28,6 +28,7 @@ public class LogIn extends RequestHandler {
                 } else {
                     request.setAttribute("fout", "No valid email/password");
                 }
+                response.sendRedirect("Controller?command=Home");
                 return "Controller?command=Home";
             }
         }

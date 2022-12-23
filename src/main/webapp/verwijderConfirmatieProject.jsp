@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <header>
-    <jsp:include page="nav.jspf"/>
+    <jsp:include page="nav.jsp"/>
 </header>
 <body>
 <article class="random-tekst">

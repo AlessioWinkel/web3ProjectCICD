@@ -32,6 +32,7 @@ public class searchProjectById extends RequestHandler{
             try {
                 Project project = service.findProjectWithId(id);
                 request.setAttribute("project", project);
+                response.sendRedirect("Controller?command=Home");
                 return "Controller?command=Home";
             } catch (DomainException | DbException exc) {
                 errors.add(exc.getMessage());

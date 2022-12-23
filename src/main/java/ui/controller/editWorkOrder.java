@@ -43,6 +43,7 @@ public class editWorkOrder extends RequestHandler{
         if (errors.size() == 0) {
             try {
                 service.editWorkOrder(workOrder.getWorkorderid(),workOrder.getDate(),workOrder.getStart(), workOrder.getEnd(),workOrder.getDescription());
+                response.sendRedirect("Controller?command=workOrderOverviewPage");
                 return "Controller?command=workOrderOverviewPage";
             } catch (DomainException | DbException exc) {
                 errors.add(exc.getMessage());

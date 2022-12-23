@@ -8,6 +8,7 @@ import ui.controller.RequestHandler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class updateUser extends RequestHandler {
@@ -31,8 +32,9 @@ public class updateUser extends RequestHandler {
         if (errors.size() == 0) {
             try {
                 service.updateUser(user.getUserid(),user.getFirstName(),user.getLastName(),user.getEmail(),user.getTeamString(),user.getRoleString());
+                response.sendRedirect("Controller?command=userOverview");
                 return "Controller?command=userOverview";
-            } catch (DomainException | DbException exc) {
+            } catch (DomainException | DbException | IOException exc) {
                 errors.add(exc.getMessage());
             }
         }

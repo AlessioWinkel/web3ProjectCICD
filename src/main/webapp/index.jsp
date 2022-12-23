@@ -13,7 +13,7 @@
 <body>
 	<div id="container">
 		<header>
-			<jsp:include page="nav.jspf"/>
+			<jsp:include page="nav.jsp"/>
 		</header>
 		<main>
 			<h1>Home</h1>

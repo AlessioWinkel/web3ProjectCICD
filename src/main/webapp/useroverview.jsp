@@ -12,7 +12,7 @@
 <header>
 <h1><span>XXX</span></h1>
 
-        <jsp:include page="nav.jspf"/>
+        <jsp:include page="nav.jsp"/>
 <h2>
 User Overview
 </h2>
@@ -47,16 +47,40 @@ User Overview
                     <td>${user.email}</td>
                     <td>${user.team}</td>
                     <td>${user.role}</td>
-                    <td>
-                        <a href="Controller?command=editPage&id=${user.userid}&lastName=${user.lastName}&firstName=${user.firstName}&email=${user.email}" id="pasAanKnop">
-                            Pas aan
-                        </a>
-                    </td>
+                    <c:choose>
+                        <c:when test="${sessionScope.user == null}">
 
-                    <td>
-                        <a href="Controller?command=verwijderConfirmatie&id=${user.userid}&firstName=${user.firstName}" id="verwijderKnop">X</a>
-                    </td>
+                        </c:when>
+                        <c:otherwise>
+                            <c:if test="${sessionScope.user.userid == user.userid && sessionScope.user.role == 'EMPLOYEE'}">
 
+                            <td>
+                                <a href="Controller?command=editPage&id=${user.userid}&lastName=${user.lastName}&firstName=${user.firstName}&email=${user.email}" id="pasAanKnop">
+                                    Pas aan
+                                </a>
+                            </td>
+                            </c:if>
+                        </c:otherwise>
+                    </c:choose>
+
+                        <c:if test="${sessionScope.user != null && sessionScope.user.role != 'EMPLOYEE' && sessionScope.user.role != 'TEAMLEADER'}">
+                            <td>
+                                <a href="Controller?command=editPage&id=${user.userid}&lastName=${user.lastName}&firstName=${user.firstName}&email=${user.email}" id="pasAanKnop3">
+                                    Pas aan
+                                </a>
+                            </td>
+                            <td>
+                                <a href="Controller?command=verwijderConfirmatie&id=${user.userid}&firstName=${user.firstName}" id="verwijderKnop2">X</a>
+                            </td>
+                        </c:if>
+
+                    <c:if test="${sessionScope.user != null && sessionScope.user.role == 'TEAMLEADER' && user.team == sessionScope.user.team}">
+                        <td>
+                            <a href="Controller?command=editPage&id=${user.userid}&lastName=${user.lastName}&firstName=${user.firstName}&email=${user.email}" id="pasAanKnop2">
+                                Pas aan
+                            </a>
+                        </td>
+                    </c:if>
                 </tr>
 
             </c:forEach>

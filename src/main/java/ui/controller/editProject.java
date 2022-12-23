@@ -35,6 +35,7 @@ public class editProject extends RequestHandler{
         if (errors.size() == 0) {
             try {
                 service.editProject(id,project.getStart(),project.getEnd());
+                response.sendRedirect("Controller?command=projectOverview");
                 return "Controller?command=projectOverview";
             } catch (DomainException | DbException exc) {
                 errors.add(exc.getMessage());

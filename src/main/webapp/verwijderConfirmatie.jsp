@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="styles/style.css" type="text/css">
 </head>
 <header>
-    <jsp:include page="nav.jspf"/>
+    <jsp:include page="nav.jsp"/>
 </header>
 <body>
 <article class="random-tekst">
